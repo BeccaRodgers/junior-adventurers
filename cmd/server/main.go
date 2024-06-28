@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-//go:embed *.html *.css
+//go:embed *.html static
 var publicFiles embed.FS
 
 func main() {
