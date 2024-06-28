@@ -27,5 +27,5 @@ jobs:
           go-version: '^1.22.0'
 
       # Runs a single command using the runners shell
-      - name: Run a Go command
-        run: go version
+      - name: Run tests
+        run: go test
