@@ -1,15 +1,17 @@
 package main
 
 import (
+	"embed"
 	"errors"
 	"log"
 	"net/http"
 )
 
+//go:embed *.html
+var publicFiles embed.FS
+
 func main() {
-	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_, _ = w.Write([]byte("Greetings, adventurers!"))
-	})
+	handler := http.FileServerFS(publicFiles)
 	server := http.Server{
 		Addr:    ":8080",
 		Handler: handler,
