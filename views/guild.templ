@@ -1,0 +1,67 @@
+package views
+
+templ Guild() {
+    @Root() {
+        <section class="section">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    Founders Guild
+                </h1>
+            </div>
+            <div class="container">
+                <h2 class="subtitle has-text-centered">
+                    Leaders
+                </h2>
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">Beyoncé</p>
+                        <p class="subtitle">GuildMaster</p>
+                    </div>
+                </div>
+                <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Species</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Alex</td>
+                        <td>Human</td>
+                    </tr>
+                    <tr>
+                        <td>Beyoncé</td>
+                        <td>Dwarf</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h2 class="subtitle has-text-centered">
+                    Members
+                </h2>
+                <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Angela</td>
+                        <td>Human</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Bob</td>
+                        <td>Human</td>
+                        <td>12</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
+            </div>
+        </section>
+    }
+}
