@@ -25,6 +25,9 @@ jobs:
         with:
           go-version: '^1.22.0'
 
-      # Runs a single command using the runners shell
+      - name: Regenerate files
+        run: ./regenerate.sh
+      - name: Ensure generated files are up to date
+        run: ./no-changes.sh
       - name: Run tests
         run: go test
