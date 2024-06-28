@@ -2,7 +2,11 @@ module junior-adventurers
 
 go 1.22
 
-require github.com/a-h/templ v0.2.731
+require (
+	github.com/a-h/templ v0.2.731
+	github.com/approvals/go-approval-tests v0.0.0-20220211023609-e0319e82dc37
+	github.com/stretchr/testify v1.8.4
+)
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
@@ -12,11 +16,13 @@ require (
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cli/browser v1.3.0 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.16.0 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/natefinch/atomic v1.0.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/segmentio/asm v1.2.0 // indirect
 	github.com/segmentio/encoding v0.4.0 // indirect
 	go.lsp.dev/jsonrpc2 v0.10.0 // indirect
@@ -29,4 +35,5 @@ require (
 	golang.org/x/sync v0.3.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/tools v0.13.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
