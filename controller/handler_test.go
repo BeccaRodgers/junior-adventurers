@@ -2,9 +2,13 @@ package controller
 
 import (
 	"bytes"
+	"context"
 	approvals "github.com/approvals/go-approval-tests"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"github.com/yosssi/gohtml"
+	"junior-adventurers/fixtures"
+	"junior-adventurers/memdb"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -21,7 +25,10 @@ func TestHandler_GuildPage(t *testing.T) {
 func approveGetPage(t *testing.T, path string) {
 	t.Helper()
 
-	handler := Handler()
+	guilds := memdb.NewGuildRepository()
+	require.NoError(t, fixtures.InsertGuilds(context.TODO(), guilds))
+
+	handler := Handler(guilds)
 	request := httptest.NewRequest(http.MethodGet, path, nil)
 	recorder := httptest.NewRecorder()
 	handler.ServeHTTP(recorder, request)
