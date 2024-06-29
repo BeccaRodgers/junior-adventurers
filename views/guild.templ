@@ -1,6 +1,9 @@
 package views
 
-import "strconv"
+import(
+ "strconv"
+ "time"
+)
 
 templ Guild(guild GuildData) {
     @Root() {
@@ -10,16 +13,35 @@ templ Guild(guild GuildData) {
                     { guild.Name }
                 </h1>
             </div>
+            <br>
             <div class="container">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-1by1">
+                                    <img
+                                    src="/static/Beyonce.png"
+                                    alt={ guild.GuildMaster }
+                                    />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <p class="title">{ guild.GuildMaster }</p>
+                                <p class="subtitle">GuildMaster</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                    <p class="block"><b>Founded:</b> { guild.Founded.UTC().Format(time.DateOnly) }</p>
+                    <p class="block"><b>Meeting Place:</b> { guild.MeetingPlace }</p>
+                    <p class="block"><b>Meeting Time:</b> { guild.MeetingTime }</p>
+                    <p class="block"><b>Contact email:</b> <a href={ templ.URL("mailto:"+guild.Email) }>{ guild.Email }</a></p>
+                    </div>
+                </div>
                 <h2 class="subtitle has-text-centered">
                     Leaders
                 </h2>
-                <div class="card">
-                    <div class="card-content">
-                        <p class="title">{ guild.GuildMaster }</p>
-                        <p class="subtitle">GuildMaster</p>
-                    </div>
-                </div>
                 <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
                     <thead>
                     <tr>
