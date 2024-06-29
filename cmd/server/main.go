@@ -2,7 +2,7 @@ package main
 
 import (
 	"errors"
-	"junior-adventurers/controllers"
+	"junior-adventurers/controller"
 	"log"
 	"net/http"
 )
@@ -11,7 +11,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    ":8080",
-		Handler: controllers.Handler(),
+		Handler: controller.Handler(),
 	}
 
 	err := server.ListenAndServe()
