@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"bytes"
 	approvals "github.com/approvals/go-approval-tests"
 	"github.com/stretchr/testify/assert"
+	"github.com/yosssi/gohtml"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -24,5 +26,8 @@ func approveGetPage(t *testing.T, path string) {
 	recorder := httptest.NewRecorder()
 	handler.ServeHTTP(recorder, request)
 	assert.Equal(t, http.StatusOK, recorder.Code)
-	approvals.Verify(t, recorder.Body)
+	bodyBytes := gohtml.FormatBytes(recorder.Body.Bytes())
+	var formattedOutput bytes.Buffer
+	formattedOutput.Write(bodyBytes)
+	approvals.Verify(t, &formattedOutput)
 }
