@@ -1,11 +1,13 @@
 package views
 
-templ Guild() {
+import "strconv"
+
+templ Guild(guild GuildData) {
     @Root() {
         <section class="section">
             <div class="container has-text-centered">
                 <h1 class="title">
-                    Founders Guild
+                    { guild.Name }
                 </h1>
             </div>
             <div class="container">
@@ -14,7 +16,7 @@ templ Guild() {
                 </h2>
                 <div class="card">
                     <div class="card-content">
-                        <p class="title">Beyoncé</p>
+                        <p class="title">{ guild.GuildMaster }</p>
                         <p class="subtitle">GuildMaster</p>
                     </div>
                 </div>
@@ -26,14 +28,12 @@ templ Guild() {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Alex</td>
-                        <td>Human</td>
-                    </tr>
-                    <tr>
-                        <td>Beyoncé</td>
-                        <td>Dwarf</td>
-                    </tr>
+                    for _, leader := range guild.Leaders {
+                        <tr>
+                            <td>{ leader.Name }</td>
+                            <td>{ leader.Species }</td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
                 <h2 class="subtitle has-text-centered">
@@ -48,16 +48,13 @@ templ Guild() {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Angela</td>
-                        <td>Human</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>Bob</td>
-                        <td>Human</td>
-                        <td>12</td>
-                    </tr>
+                    for _, member := range guild.Members {
+                        <tr>
+                            <td>{ member.Name }</td>
+                            <td>{ member.Species }</td>
+                            <td>{ strconv.Itoa(member.Age) }</td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
                 <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
