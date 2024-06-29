@@ -24,3 +24,7 @@ go.work.sum
 
 # IDEs
 .idea
+
+# Generated
+bin
+tmp
