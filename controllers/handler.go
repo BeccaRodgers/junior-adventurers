@@ -5,6 +5,7 @@ import (
 	"junior-adventurers/static"
 	"junior-adventurers/views"
 	"net/http"
+	"time"
 )
 
 func Handler() http.Handler {
@@ -16,8 +17,12 @@ func Handler() http.Handler {
 }
 
 var guild = views.GuildData{
-	Name:        "Founders Guild",
-	GuildMaster: "Beyoncé",
+	Name:         "Founders Guild",
+	Founded:      time.Now(),
+	MeetingPlace: "Hall of the Mountain King",
+	MeetingTime:  "Thursday, 7pm",
+	Email:        "foundersguild@example.com",
+	GuildMaster:  "Beyoncé",
 	Leaders: []views.Leader{
 		{
 			Member: views.Member{
@@ -44,6 +49,16 @@ var guild = views.GuildData{
 			Name:    "Bob",
 			Age:     12,
 			Species: "Human",
+		},
+		{
+			Name:    "Charlotte",
+			Age:     11,
+			Species: "Werewolf",
+		},
+		{
+			Name:    "David",
+			Age:     11,
+			Species: "Dwarf",
 		},
 	},
 }
