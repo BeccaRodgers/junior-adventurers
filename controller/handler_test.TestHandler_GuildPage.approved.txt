@@ -14,7 +14,7 @@
     <section class="section">
       <div class="container has-text-centered">
         <h1 class="title">
-          Founders Guild
+          Founder&#39;s Guild
         </h1>
       </div>
       <br>
