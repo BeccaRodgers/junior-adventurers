@@ -1,6 +1,8 @@
 module junior-adventurers
 
-go 1.22
+go 1.22.0
+
+toolchain go1.22.4
 
 require (
 	github.com/a-h/templ v0.2.731
@@ -11,6 +13,7 @@ require (
 )
 
 require (
+	artk.dev v0.3.0 // indirect
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
 	github.com/a-h/parse v0.0.0-20240121214402-3caf7543159a // indirect
