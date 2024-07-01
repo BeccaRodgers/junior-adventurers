@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"junior-adventurers/model"
+	"time"
 )
 
 func FoundersGuildID() model.GuildID {
@@ -12,8 +13,12 @@ func FoundersGuildID() model.GuildID {
 
 func FoundersGuild() *model.Guild {
 	return model.GuildSerialization{
-		ID:   FoundersGuildID(),
-		Name: "Founder's Guild",
+		ID:           FoundersGuildID(),
+		Name:         "Founder's Guild",
+		FoundingDate: time.Date(2000, time.April, 20, 0, 0, 0, 0, time.UTC),
+		MeetingPlace: "Hall of the Mountain King",
+		MeetingTime:  "Thursday, 7pm",
+		Email:        "foundersguild@example.com",
 	}.Deserialize()
 }
 
