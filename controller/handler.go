@@ -9,7 +9,6 @@ import (
 	"junior-adventurers/view"
 	"net/http"
 	"strconv"
-	"time"
 )
 
 func Handler(guilds model.GuildRepository) http.Handler {
@@ -44,56 +43,61 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	viewModel := exampleGuildViewModel()
-	viewModel.Name = string(guild.Name())
-
+	viewModel := c.assembleGuildData(guild)
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
-// Deprecated: use model instead.
-func exampleGuildViewModel() view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild) view.GuildData {
 	return view.GuildData{
-		Name:         "Founders Guild",
-		Founded:      time.Now(),
-		MeetingPlace: "Hall of the Mountain King",
-		MeetingTime:  "Thursday, 7pm",
-		Email:        "foundersguild@example.com",
+		Name:         string(guild.Name()),
+		Founded:      guild.FoundingDate(),
+		MeetingPlace: string(guild.MeetingPlace()),
+		MeetingTime:  string(guild.MeetingTime()),
+		Email:        string(guild.Email()),
 		GuildMaster:  "Beyoncé",
-		Leaders: []view.Leader{
-			{
-				Member: view.Member{
-					Name:    "Alex",
-					Age:     40,
-					Species: "Human",
-				},
-			},
-			{
-				Member: view.Member{
-					Name:    "Beyoncé",
-					Age:     42,
-					Species: "Dwarf",
-				},
+		Leaders:      c.assembleLeaders(),
+		Members:      c.assembleMembers(),
+	}
+}
+
+func (c controller) assembleMembers() []view.Member {
+	return []view.Member{
+		{
+			Name:    "Angela",
+			Age:     10,
+			Species: "Human",
+		},
+		{
+			Name:    "Bob",
+			Age:     12,
+			Species: "Human",
+		},
+		{
+			Name:    "Charlotte",
+			Age:     11,
+			Species: "Werewolf",
+		},
+		{
+			Name:    "David",
+			Age:     11,
+			Species: "Dwarf",
+		},
+	}
+}
+
+func (c controller) assembleLeaders() []view.Leader {
+	return []view.Leader{
+		{
+			Member: view.Member{
+				Name:    "Alex",
+				Age:     40,
+				Species: "Human",
 			},
 		},
-		Members: []view.Member{
-			{
-				Name:    "Angela",
-				Age:     10,
-				Species: "Human",
-			},
-			{
-				Name:    "Bob",
-				Age:     12,
-				Species: "Human",
-			},
-			{
-				Name:    "Charlotte",
-				Age:     11,
-				Species: "Werewolf",
-			},
-			{
-				Name:    "David",
-				Age:     11,
+		{
+			Member: view.Member{
+				Name:    "Beyoncé",
+				Age:     42,
 				Species: "Dwarf",
 			},
 		},
