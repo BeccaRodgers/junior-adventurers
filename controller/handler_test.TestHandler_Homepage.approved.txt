@@ -7,7 +7,7 @@
     <title>
       Junior Adventurers
     </title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.min.css">
     <script src="/static/htmx.min.js"></script>
   </head>
   <body hx-target="this">

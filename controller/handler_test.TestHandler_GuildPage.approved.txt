@@ -7,7 +7,7 @@
     <title>
       Junior Adventurers
     </title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.min.css">
     <script src="/static/htmx.min.js"></script>
   </head>
   <body hx-target="this">
@@ -42,7 +42,7 @@
               <b>
                 Founded:
               </b>
-              2024-06-29
+              2024-07-01
             </p>
             <p class="block">
               <b>
