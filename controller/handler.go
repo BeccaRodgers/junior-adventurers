@@ -50,6 +50,7 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
+// Deprecated: use model instead.
 func exampleGuildViewModel() view.GuildData {
 	return view.GuildData{
 		Name:         "Founders Guild",
