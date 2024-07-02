@@ -19,6 +19,12 @@ func FoundersGuild() *model.Guild {
 		MeetingPlace: "Hall of the Mountain King",
 		MeetingTime:  "Thursday, 7pm",
 		Email:        "foundersguild@example.com",
+		Members: []model.MemberID{
+			AngelaID(),
+			BobID(),
+			CharlotteID(),
+			DavidID(),
+		},
 	}.Deserialize()
 }
 
