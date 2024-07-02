@@ -11,10 +11,11 @@ import (
 	"strconv"
 )
 
-func Handler(guilds model.GuildRepository) http.Handler {
+func Handler(guilds model.GuildRepository, members model.MemberRepository) http.Handler {
 	controller := controller{
 		ServeMux: http.NewServeMux(),
 		guilds:   guilds,
+		members:  members,
 	}
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
@@ -24,7 +25,8 @@ func Handler(guilds model.GuildRepository) http.Handler {
 
 type controller struct {
 	*http.ServeMux
-	guilds model.GuildRepository
+	guilds  model.GuildRepository
+	members model.MemberRepository
 }
 
 func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
@@ -43,11 +45,21 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	viewModel := c.assembleGuildData(guild)
+	var members []*model.Member
+	for _, memberID := range guild.Members() {
+		member, err := c.members.Get(ctx, model.MemberID(memberID))
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		members = append(members, member)
+	}
+
+	viewModel := c.assembleGuildData(guild, members)
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member) view.GuildData {
 	return view.GuildData{
 		Name:         string(guild.Name()),
 		Founded:      guild.FoundingDate(),
@@ -56,33 +68,20 @@ func (c controller) assembleGuildData(guild *model.Guild) view.GuildData {
 		Email:        string(guild.Email()),
 		GuildMaster:  "Beyoncé",
 		Leaders:      c.assembleLeaders(),
-		Members:      c.assembleMembers(),
+		Members:      c.assembleMembers(members),
 	}
 }
 
-func (c controller) assembleMembers() []view.Member {
-	return []view.Member{
-		{
-			Name:    "Angela",
-			Age:     10,
-			Species: "Human",
-		},
-		{
-			Name:    "Bob",
-			Age:     12,
-			Species: "Human",
-		},
-		{
-			Name:    "Charlotte",
-			Age:     11,
-			Species: "Werewolf",
-		},
-		{
-			Name:    "David",
-			Age:     11,
-			Species: "Dwarf",
-		},
+func (c controller) assembleMembers(members []*model.Member) []view.Member {
+	var viewMembers []view.Member
+	for _, member := range members {
+		viewMembers = append(viewMembers, view.Member{
+			Name:    string(member.Name()),
+			Age:     member.Age(),
+			Species: member.Species().String(),
+		})
 	}
+	return viewMembers
 }
 
 func (c controller) assembleLeaders() []view.Leader {

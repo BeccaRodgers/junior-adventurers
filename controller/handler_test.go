@@ -27,8 +27,10 @@ func approveGetPage(t *testing.T, path string) {
 
 	guilds := memdb.NewGuildRepository()
 	require.NoError(t, fixtures.InsertGuilds(context.TODO(), guilds))
+	members := memdb.NewMemberRepository()
+	require.NoError(t, fixtures.InsertMembers(context.TODO(), members))
 
-	handler := Handler(guilds)
+	handler := Handler(guilds, members)
 	request := httptest.NewRequest(http.MethodGet, path, nil)
 	recorder := httptest.NewRecorder()
 	handler.ServeHTTP(recorder, request)

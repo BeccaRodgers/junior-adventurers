@@ -15,10 +15,14 @@ func main() {
 	if err := fixtures.InsertGuilds(context.Background(), guilds); err != nil {
 		log.Print("Inserting fake data:", err)
 	}
+	members := memdb.NewMemberRepository()
+	if err := fixtures.InsertMembers(context.Background(), members); err != nil {
+		log.Print("Inserting fake data:", err)
+	}
 
 	server := http.Server{
 		Addr:    ":8080",
-		Handler: controller.Handler(guilds),
+		Handler: controller.Handler(guilds, members),
 	}
 
 	err := server.ListenAndServe()

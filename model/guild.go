@@ -9,6 +9,7 @@ type Guild struct {
 	meetingPlace GuildMeetingPlace
 	meetingTime  GuildMeetingTime
 	email        GuildEmail
+	members      []MemberID
 }
 
 func (g *Guild) Name() GuildName {
@@ -35,6 +36,10 @@ func (g *Guild) Email() GuildEmail {
 	return g.email
 }
 
+func (g *Guild) Members() []MemberID {
+	return g.members
+}
+
 func (g *Guild) Serialize() GuildSerialization {
 	return GuildSerialization{
 		ID:           g.id,
@@ -43,6 +48,7 @@ func (g *Guild) Serialize() GuildSerialization {
 		MeetingPlace: g.meetingPlace,
 		MeetingTime:  g.meetingTime,
 		Email:        g.email,
+		Members:      g.members,
 	}
 }
 
@@ -53,6 +59,7 @@ type GuildSerialization struct {
 	MeetingPlace GuildMeetingPlace
 	MeetingTime  GuildMeetingTime
 	Email        GuildEmail
+	Members      []MemberID
 }
 
 func (s GuildSerialization) Deserialize() *Guild {
@@ -63,6 +70,7 @@ func (s GuildSerialization) Deserialize() *Guild {
 		meetingPlace: s.MeetingPlace,
 		meetingTime:  s.MeetingTime,
 		email:        s.Email,
+		members:      s.Members,
 	}
 }
 
