@@ -25,6 +25,10 @@ func FoundersGuild() *model.Guild {
 			CharlotteID(),
 			DavidID(),
 		},
+		Leaders: []model.MemberID{
+			AlexID(),
+			BeyonceID(),
+		},
 	}.Deserialize()
 }
 

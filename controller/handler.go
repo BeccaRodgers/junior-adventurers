@@ -47,7 +47,7 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 
 	var members []*model.Member
 	for _, memberID := range guild.Members() {
-		member, err := c.members.Get(ctx, model.MemberID(memberID))
+		member, err := c.members.Get(ctx, memberID)
 		if err != nil {
 			httperror.EncodeToText(w, err)
 			return
@@ -55,11 +55,21 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		members = append(members, member)
 	}
 
-	viewModel := c.assembleGuildData(guild, members)
+	var leaders []*model.Member
+	for _, memberID := range guild.Leaders() {
+		member, err := c.members.Get(ctx, memberID)
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		leaders = append(leaders, member)
+	}
+
+	viewModel := c.assembleGuildData(guild, members, leaders)
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member, leaders []*model.Member) view.GuildData {
 	return view.GuildData{
 		Name:         string(guild.Name()),
 		Founded:      guild.FoundingDate(),
@@ -67,7 +77,7 @@ func (c controller) assembleGuildData(guild *model.Guild, members []*model.Membe
 		MeetingTime:  string(guild.MeetingTime()),
 		Email:        string(guild.Email()),
 		GuildMaster:  "Beyoncé",
-		Leaders:      c.assembleLeaders(),
+		Leaders:      c.assembleLeaders(leaders),
 		Members:      c.assembleMembers(members),
 	}
 }
@@ -84,21 +94,16 @@ func (c controller) assembleMembers(members []*model.Member) []view.Member {
 	return viewMembers
 }
 
-func (c controller) assembleLeaders() []view.Leader {
-	return []view.Leader{
-		{
+func (c controller) assembleLeaders(leaders []*model.Member) []view.Leader {
+	var viewLeaders []view.Leader
+	for _, leader := range leaders {
+		viewLeaders = append(viewLeaders, view.Leader{
 			Member: view.Member{
-				Name:    "Alex",
-				Age:     40,
-				Species: "Human",
+				Name:    string(leader.Name()),
+				Age:     leader.Age(),
+				Species: leader.Species().String(),
 			},
-		},
-		{
-			Member: view.Member{
-				Name:    "Beyoncé",
-				Age:     42,
-				Species: "Dwarf",
-			},
-		},
+		})
 	}
+	return viewLeaders
 }
