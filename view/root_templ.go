@@ -26,7 +26,7 @@ func Root() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\"><title>Junior Adventurers</title><link rel=\"stylesheet\" href=\"/static/style.min.css\"><script src=\"/static/htmx.min.js\"></script></head><body hx-target=\"this\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\"><title>Junior Adventurers</title><link rel=\"stylesheet\" href=\"/static/style.min.css\"><link rel=\"icon\" type=\"image/x-icon\" href=\"/static/favicon.ico\"><script src=\"/static/htmx.min.js\"></script></head><body hx-target=\"this\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
