@@ -46,3 +46,11 @@ func Test_Guild_MeetingPlace(t *testing.T) {
 
 	assert.Equal(t, fixtures.FoundersGuildMeetingPlace(), place)
 }
+
+func Test_Guild_MeetingTime(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	time := guild.MeetingTime()
+
+	assert.Equal(t, fixtures.FoundersGuildMeetingTime(), time)
+}
