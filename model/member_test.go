@@ -30,3 +30,11 @@ func Test_Member_Name(t *testing.T) {
 
 	assert.Equal(t, fixtures.AngelaName(), name)
 }
+
+func Test_Member_DOB(t *testing.T) {
+	member := fixtures.Angela()
+
+	dob := member.DOB()
+
+	assert.Equal(t, fixtures.AngelaDOB(), dob)
+}

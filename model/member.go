@@ -17,7 +17,7 @@ func (m *Member) Name() MemberName {
 	return m.name
 }
 
-func (m *Member) Dob() time.Time {
+func (m *Member) DOB() time.Time {
 	return m.dob
 }
 
