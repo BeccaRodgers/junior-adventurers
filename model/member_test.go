@@ -46,3 +46,11 @@ func Test_Member_Species(t *testing.T) {
 
 	assert.Equal(t, fixtures.AngelaSpecies(), species)
 }
+
+func Test_Member_Image(t *testing.T) {
+	member := fixtures.Beyonce()
+
+	image := member.Image()
+
+	assert.Equal(t, fixtures.BeyonceImage(), image)
+}

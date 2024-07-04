@@ -7,6 +7,7 @@ type Member struct {
 	name    MemberName
 	dob     time.Time
 	species MemberSpecies
+	image   MemberImage
 }
 
 func (m *Member) ID() MemberID {
@@ -41,12 +42,17 @@ func (m *Member) Species() MemberSpecies {
 	return m.species
 }
 
+func (m *Member) Image() MemberImage {
+	return m.image
+}
+
 func (m *Member) Serialize() MemberSerialization {
 	return MemberSerialization{
 		ID:      m.id,
 		Name:    m.name,
 		DOB:     m.dob,
 		Species: m.species,
+		Image:   m.image,
 	}
 }
 
@@ -55,6 +61,7 @@ type MemberSerialization struct {
 	Name    MemberName
 	DOB     time.Time
 	Species MemberSpecies
+	Image   MemberImage
 }
 
 func (s MemberSerialization) Deserialize() *Member {
@@ -63,12 +70,14 @@ func (s MemberSerialization) Deserialize() *Member {
 		name:    s.Name,
 		dob:     s.DOB,
 		species: s.Species,
+		image:   s.Image,
 	}
 }
 
 type MemberID int64
 type MemberName string
 type MemberSpecies int64
+type MemberImage string
 
 const (
 	Human MemberSpecies = iota
