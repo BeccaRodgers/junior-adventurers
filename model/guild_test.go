@@ -30,3 +30,11 @@ func Test_Guild_Name(t *testing.T) {
 
 	assert.Equal(t, fixtures.FoundersGuildName(), name)
 }
+
+func Test_Guild_FoundingDate(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	date := guild.FoundingDate()
+
+	assert.Equal(t, fixtures.FoundersGuildFoundingDate(), date)
+}
