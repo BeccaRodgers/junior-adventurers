@@ -70,3 +70,11 @@ func Test_Guild_Members(t *testing.T) {
 
 	assert.Equal(t, fixtures.FoundersGuildMembers(), members)
 }
+
+func Test_Guild_Leaders(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	leaders := guild.Leaders()
+
+	assert.Equal(t, fixtures.FoundersGuildLeaders(), leaders)
+}
