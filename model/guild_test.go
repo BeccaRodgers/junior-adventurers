@@ -15,9 +15,17 @@ func Test_Guild_DeserializeSerialize(t *testing.T) {
 	assert.Equal(t, guildSerialization, guildSerialized)
 }
 
+func Test_Guild_ID(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	id := guild.ID()
+
+	assert.Equal(t, fixtures.FoundersGuildID(), id)
+}
+
 func Test_Guild_Name(t *testing.T) {
 	guild := fixtures.FoundersGuild()
-	
+
 	name := guild.Name()
 
 	assert.Equal(t, fixtures.FoundersGuildName(), name)
