@@ -14,3 +14,11 @@ func Test_MemberDeserializeSerialize(t *testing.T) {
 
 	assert.Equal(t, memberSerialization, memberSerialized)
 }
+
+func Test_Member_ID(t *testing.T) {
+	member := fixtures.Angela()
+
+	id := member.ID()
+
+	assert.Equal(t, fixtures.AngelaID(), id)
+}
