@@ -30,6 +30,15 @@ func FoundersGuildEmail() model.GuildEmail {
 	return "foundersguild@example.com"
 }
 
+func FoundersGuildMembers() []model.MemberID {
+	return []model.MemberID{
+		AngelaID(),
+		BobID(),
+		CharlotteID(),
+		DavidID(),
+	}
+}
+
 func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
@@ -38,12 +47,7 @@ func FoundersGuildSerialization() model.GuildSerialization {
 		MeetingPlace: FoundersGuildMeetingPlace(),
 		MeetingTime:  FoundersGuildMeetingTime(),
 		Email:        FoundersGuildEmail(),
-		Members: []model.MemberID{
-			AngelaID(),
-			BobID(),
-			CharlotteID(),
-			DavidID(),
-		},
+		Members:      FoundersGuildMembers(),
 		Leaders: []model.MemberID{
 			AlexID(),
 			BeyonceID(),

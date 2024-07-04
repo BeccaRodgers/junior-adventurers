@@ -62,3 +62,11 @@ func Test_Guild_Email(t *testing.T) {
 
 	assert.Equal(t, fixtures.FoundersGuildEmail(), email)
 }
+
+func Test_Guild_Members(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	members := guild.Members()
+
+	assert.Equal(t, fixtures.FoundersGuildMembers(), members)
+}
