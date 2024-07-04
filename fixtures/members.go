@@ -15,11 +15,15 @@ func AngelaName() model.MemberName {
 	return "Angela"
 }
 
+func AngelaDOB() time.Time {
+	return time.Date(2014, 1, 7, 0, 0, 0, 0, time.UTC)
+}
+
 func AngelaSerialization() model.MemberSerialization {
 	return model.MemberSerialization{
 		ID:      AngelaID(),
 		Name:    AngelaName(),
-		DOB:     time.Date(2014, 1, 7, 0, 0, 0, 0, time.UTC),
+		DOB:     AngelaDOB(),
 		Species: model.Human,
 	}
 }
