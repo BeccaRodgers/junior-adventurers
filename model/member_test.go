@@ -38,3 +38,11 @@ func Test_Member_DOB(t *testing.T) {
 
 	assert.Equal(t, fixtures.AngelaDOB(), dob)
 }
+
+func Test_Member_Species(t *testing.T) {
+	member := fixtures.Angela()
+
+	species := member.Species()
+
+	assert.Equal(t, fixtures.AngelaSpecies(), species)
+}
