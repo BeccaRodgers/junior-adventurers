@@ -22,3 +22,11 @@ func Test_Member_ID(t *testing.T) {
 
 	assert.Equal(t, fixtures.AngelaID(), id)
 }
+
+func Test_Member_Name(t *testing.T) {
+	member := fixtures.Angela()
+
+	name := member.Name()
+
+	assert.Equal(t, fixtures.AngelaName(), name)
+}
