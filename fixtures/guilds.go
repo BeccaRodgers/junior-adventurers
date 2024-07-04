@@ -14,11 +14,15 @@ func FoundersGuildName() model.GuildName {
 	return "Founder's Guild"
 }
 
+func FoundersGuildFoundingDate() time.Time {
+	return time.Date(2000, time.April, 20, 0, 0, 0, 0, time.UTC)
+}
+
 func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
 		Name:         FoundersGuildName(),
-		FoundingDate: time.Date(2000, time.April, 20, 0, 0, 0, 0, time.UTC),
+		FoundingDate: FoundersGuildFoundingDate(),
 		MeetingPlace: "Hall of the Mountain King",
 		MeetingTime:  "Thursday, 7pm",
 		Email:        "foundersguild@example.com",
