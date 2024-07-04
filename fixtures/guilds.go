@@ -11,7 +11,7 @@ func FoundersGuildID() model.GuildID {
 	return 1
 }
 
-func FoundersGuild() *model.Guild {
+func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
 		Name:         "Founder's Guild",
@@ -29,7 +29,11 @@ func FoundersGuild() *model.Guild {
 			AlexID(),
 			BeyonceID(),
 		},
-	}.Deserialize()
+	}
+}
+
+func FoundersGuild() *model.Guild {
+	return FoundersGuildSerialization().Deserialize()
 }
 
 func InsertGuilds(ctx context.Context, guilds model.GuildRepository) error {
