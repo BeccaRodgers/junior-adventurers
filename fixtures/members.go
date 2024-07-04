@@ -19,12 +19,16 @@ func AngelaDOB() time.Time {
 	return time.Date(2014, 1, 7, 0, 0, 0, 0, time.UTC)
 }
 
+func AngelaSpecies() model.MemberSpecies {
+	return model.Human
+}
+
 func AngelaSerialization() model.MemberSerialization {
 	return model.MemberSerialization{
 		ID:      AngelaID(),
 		Name:    AngelaName(),
 		DOB:     AngelaDOB(),
-		Species: model.Human,
+		Species: AngelaSpecies(),
 	}
 }
 
