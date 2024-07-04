@@ -26,6 +26,10 @@ func FoundersGuildMeetingTime() model.GuildMeetingTime {
 	return "Thursday, 7pm"
 }
 
+func FoundersGuildEmail() model.GuildEmail {
+	return "foundersguild@example.com"
+}
+
 func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
@@ -33,7 +37,7 @@ func FoundersGuildSerialization() model.GuildSerialization {
 		FoundingDate: FoundersGuildFoundingDate(),
 		MeetingPlace: FoundersGuildMeetingPlace(),
 		MeetingTime:  FoundersGuildMeetingTime(),
-		Email:        "foundersguild@example.com",
+		Email:        FoundersGuildEmail(),
 		Members: []model.MemberID{
 			AngelaID(),
 			BobID(),
