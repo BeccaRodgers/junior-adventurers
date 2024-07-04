@@ -56,6 +56,7 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var leaders []*model.Member
+	var guildMaster *model.Member
 	for _, memberID := range guild.Leaders() {
 		member, err := c.members.Get(ctx, memberID)
 		if err != nil {
@@ -63,22 +64,33 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		leaders = append(leaders, member)
+		if memberID == guild.GuildMaster() {
+			guildMaster = member
+		}
 	}
 
-	viewModel := c.assembleGuildData(guild, members, leaders)
+	if guildMaster == nil {
+		httperror.EncodeToText(w, apperror.NotFound("guildMaster not found in members"))
+		return
+	}
+
+	viewModel := c.assembleGuildData(guild, members, leaders, guildMaster)
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member, leaders []*model.Member) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member, leaders []*model.Member, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
 		Name:         string(guild.Name()),
 		Founded:      guild.FoundingDate(),
 		MeetingPlace: string(guild.MeetingPlace()),
 		MeetingTime:  string(guild.MeetingTime()),
 		Email:        string(guild.Email()),
-		GuildMaster:  "Beyoncé",
-		Leaders:      c.assembleLeaders(leaders),
-		Members:      c.assembleMembers(members),
+		GuildMaster: view.GuildMaster{
+			Name:  string(guildMaster.Name()),
+			Image: string(guildMaster.Image()),
+		},
+		Leaders: c.assembleLeaders(leaders),
+		Members: c.assembleMembers(members),
 	}
 }
 

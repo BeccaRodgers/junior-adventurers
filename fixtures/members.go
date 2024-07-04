@@ -79,12 +79,17 @@ func BeyonceID() model.MemberID {
 	return 5
 }
 
+func BeyonceImage() model.MemberImage {
+	return "Beyonce.png"
+}
+
 func Beyonce() *model.Member {
 	return model.MemberSerialization{
 		ID:      BeyonceID(),
 		Name:    "Beyoncé",
 		DOB:     time.Date(1982, 4, 10, 0, 0, 0, 0, time.UTC),
 		Species: model.Dwarf,
+		Image:   BeyonceImage(),
 	}.Deserialize()
 }
 

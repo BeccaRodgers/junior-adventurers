@@ -21,13 +21,13 @@ templ Guild(guild GuildData) {
                             <div class="card-image">
                                 <figure class="image is-1by1">
                                     <img
-                                    src="/static/Beyonce.png"
-                                    alt={ guild.GuildMaster }
+                                    src={ "/static/"+guild.GuildMaster.Image }
+                                    alt={ guild.GuildMaster.Name }
                                     />
                                 </figure>
                             </div>
                             <div class="card-content">
-                                <p class="title">{ guild.GuildMaster }</p>
+                                <p class="title">{ guild.GuildMaster.Name }</p>
                                 <p class="subtitle">GuildMaster</p>
                             </div>
                         </div>

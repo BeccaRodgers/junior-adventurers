@@ -8,7 +8,7 @@ type GuildData struct {
 	MeetingPlace string
 	MeetingTime  string
 	Email        string
-	GuildMaster  string
+	GuildMaster  GuildMaster
 	Leaders      []Leader
 	Members      []Member
 }
@@ -21,4 +21,9 @@ type Member struct {
 	Name    string
 	Age     int
 	Species string
+}
+
+type GuildMaster struct {
+	Name  string
+	Image string
 }
