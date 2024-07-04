@@ -11,13 +11,17 @@ func AngelaID() model.MemberID {
 	return 1
 }
 
-func Angela() *model.Member {
+func AngelaSerialization() model.MemberSerialization {
 	return model.MemberSerialization{
 		ID:      AngelaID(),
 		Name:    "Angela",
 		DOB:     time.Date(2014, 1, 7, 0, 0, 0, 0, time.UTC),
 		Species: model.Human,
-	}.Deserialize()
+	}
+}
+
+func Angela() *model.Member {
+	return AngelaSerialization().Deserialize()
 }
 
 func BobID() model.MemberID {
