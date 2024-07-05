@@ -38,7 +38,7 @@ func Homepage() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">Greetings, adventurers!</h1><button class=\"button is-link\" hx-get=\"/guilds/1\" hx-push-url=\"true\">View Guild</button></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">Greetings, adventurers!</h1><button class=\"button is-link\" hx-get=\"/guilds/1\" hx-push-url=\"true\">View Founder's Guild</button> <button class=\"button is-primary\" hx-get=\"/members\" hx-push-url=\"true\">New Member</button></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

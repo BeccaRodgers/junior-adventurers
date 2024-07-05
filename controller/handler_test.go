@@ -22,6 +22,10 @@ func TestHandler_GuildPage(t *testing.T) {
 	approveGetPage(t, "/guilds/1")
 }
 
+func TestHandler_NewMemberPage(t *testing.T) {
+	approveGetPage(t, "/members")
+}
+
 func approveGetPage(t *testing.T, path string) {
 	t.Helper()
 

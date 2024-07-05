@@ -1,0 +1,61 @@
+package view
+
+import "junior-adventurers/model"
+
+templ NewMember(memberSpecies []model.MemberSpecies) {
+    @Root() {
+        <section class="section">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    New Member Details
+                </h1>
+            </div>
+            <div class="container">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Nanny Ogg">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Date of Birth</label>
+                  <div class="control">
+                    <input class="input" type="date">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Species</label>
+                  <div class="control">
+                    <div class="select">
+                        <select>
+                          <option>Select Species</option>
+                          for _, species := range memberSpecies {
+                            <option>{ species.String() }</option>
+                           }
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Guild</label>
+                  <div class="control">
+                    <div class="select">
+                        <select>
+                            <option>Select Guild</option>
+                            <option>Founder's Guild</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control">
+                        <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
+                    </p>
+                    <p class="control">
+                        <button class="button is-primary" >Submit</button>
+                    </p>
+                </div>
+            </div>
+        </section>
+    }
+}

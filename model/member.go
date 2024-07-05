@@ -97,3 +97,11 @@ func (s MemberSpecies) String() string {
 		return "Unknown Species"
 	}
 }
+
+func MemberSpeciesValues() []MemberSpecies {
+	return []MemberSpecies{
+		Human,
+		Dwarf,
+		Werewolf,
+	}
+}

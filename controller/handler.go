@@ -19,6 +19,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	}
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
+	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
 	return controller
 }
