@@ -110,11 +110,3 @@ func Test_Guild_Enquiries(t *testing.T) {
 
 	assert.Equal(t, fixtures.FoundersGuildEnquiries(), enquiries)
 }
-
-func Test_Guild_WaitingList(t *testing.T) {
-	guild := fixtures.FoundersGuild()
-
-	waitingList := guild.WaitingList()
-
-	assert.Equal(t, fixtures.FoundersGuildWaitingList(), waitingList)
-}

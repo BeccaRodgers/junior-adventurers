@@ -59,16 +59,11 @@ func FoundersGuildLeaders() []model.MemberID {
 	}
 }
 
-func FoundersGuildEnquiries() []model.MemberID {
-	return []model.MemberID{
-		CarlosID(),
-		ErikaID(),
-	}
-}
-
-func FoundersGuildWaitingList() []model.MemberID {
-	return []model.MemberID{
-		FredID(),
+func FoundersGuildEnquiries() model.GuildEnquiries {
+	return map[model.MemberID]model.EnquiryStatus{
+		CarlosID(): model.Enquired,
+		ErikaID():  model.Enquired,
+		FredID():   model.WaitingList,
 	}
 }
 
@@ -86,7 +81,6 @@ func FoundersGuildSerialization() model.GuildSerialization {
 		Members:      FoundersGuildMembers(),
 		Leaders:      FoundersGuildLeaders(),
 		Enquiries:    FoundersGuildEnquiries(),
-		WaitingList:  FoundersGuildWaitingList(),
 	}
 }
 
