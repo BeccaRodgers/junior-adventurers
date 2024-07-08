@@ -28,7 +28,7 @@ func FoundersGuildMeetingPlace() model.GuildMeetingPlace {
 }
 
 func FoundersGuildMeetingTime() model.GuildMeetingTime {
-	return "Thursday, 7pm"
+	return "Thursday, 19:00-20:30"
 }
 
 func FoundersGuildEmail() model.GuildEmail {
