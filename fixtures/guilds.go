@@ -15,6 +15,10 @@ func FoundersGuildName() model.GuildName {
 	return "Founder's Guild"
 }
 
+func FoundersGuildType() model.GuildType {
+	return model.Fledgling
+}
+
 func FoundersGuildCapacity() model.GuildCapacity {
 	return 20
 }
@@ -72,6 +76,7 @@ func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
 		Name:         FoundersGuildName(),
+		GuildType:    FoundersGuildType(),
 		Capacity:     FoundersGuildCapacity(),
 		FoundingDate: FoundersGuildFoundingDate(),
 		MeetingPlace: FoundersGuildMeetingPlace(),
