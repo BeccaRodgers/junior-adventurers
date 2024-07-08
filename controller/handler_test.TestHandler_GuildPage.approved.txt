@@ -55,7 +55,7 @@
               <b>
                 Meeting Time:
               </b>
-              Thursday, 7pm
+              Thursday, 19:00-20:30
             </p>
             <p class="block">
               <b>
