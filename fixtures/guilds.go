@@ -10,8 +10,13 @@ import (
 func FoundersGuildID() model.GuildID {
 	return 1
 }
+
 func FoundersGuildName() model.GuildName {
 	return "Founder's Guild"
+}
+
+func FoundersGuildCapacity() model.GuildCapacity {
+	return 20
 }
 
 func FoundersGuildFoundingDate() time.Time {
@@ -50,10 +55,24 @@ func FoundersGuildLeaders() []model.MemberID {
 	}
 }
 
+func FoundersGuildEnquiries() []model.MemberID {
+	return []model.MemberID{
+		CarlosID(),
+		ErikaID(),
+	}
+}
+
+func FoundersGuildWaitingList() []model.MemberID {
+	return []model.MemberID{
+		FredID(),
+	}
+}
+
 func FoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
 		ID:           FoundersGuildID(),
 		Name:         FoundersGuildName(),
+		Capacity:     FoundersGuildCapacity(),
 		FoundingDate: FoundersGuildFoundingDate(),
 		MeetingPlace: FoundersGuildMeetingPlace(),
 		MeetingTime:  FoundersGuildMeetingTime(),
@@ -61,6 +80,8 @@ func FoundersGuildSerialization() model.GuildSerialization {
 		GuildMaster:  FoundersGuildGuildMaster(),
 		Members:      FoundersGuildMembers(),
 		Leaders:      FoundersGuildLeaders(),
+		Enquiries:    FoundersGuildEnquiries(),
+		WaitingList:  FoundersGuildWaitingList(),
 	}
 }
 

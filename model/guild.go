@@ -5,6 +5,7 @@ import "time"
 type Guild struct {
 	id           GuildID
 	name         GuildName
+	capacity     GuildCapacity
 	foundingDate time.Time
 	meetingPlace GuildMeetingPlace
 	meetingTime  GuildMeetingTime
@@ -12,14 +13,20 @@ type Guild struct {
 	guildMaster  MemberID
 	members      []MemberID
 	leaders      []MemberID
+	enquiries    []MemberID
+	waitingList  []MemberID
+}
+
+func (g *Guild) ID() GuildID {
+	return g.id
 }
 
 func (g *Guild) Name() GuildName {
 	return g.name
 }
 
-func (g *Guild) ID() GuildID {
-	return g.id
+func (g *Guild) Capacity() GuildCapacity {
+	return g.capacity
 }
 
 func (g *Guild) FoundingDate() time.Time {
@@ -50,10 +57,19 @@ func (g *Guild) Leaders() []MemberID {
 	return g.leaders
 }
 
+func (g *Guild) Enquiries() []MemberID {
+	return g.enquiries
+}
+
+func (g *Guild) WaitingList() []MemberID {
+	return g.waitingList
+}
+
 func (g *Guild) Serialize() GuildSerialization {
 	return GuildSerialization{
 		ID:           g.id,
 		Name:         g.name,
+		Capacity:     g.capacity,
 		FoundingDate: g.foundingDate,
 		MeetingPlace: g.meetingPlace,
 		MeetingTime:  g.meetingTime,
@@ -61,12 +77,15 @@ func (g *Guild) Serialize() GuildSerialization {
 		GuildMaster:  g.guildMaster,
 		Members:      g.members,
 		Leaders:      g.leaders,
+		Enquiries:    g.enquiries,
+		WaitingList:  g.waitingList,
 	}
 }
 
 type GuildSerialization struct {
 	ID           GuildID
 	Name         GuildName
+	Capacity     GuildCapacity
 	FoundingDate time.Time
 	MeetingPlace GuildMeetingPlace
 	MeetingTime  GuildMeetingTime
@@ -74,12 +93,15 @@ type GuildSerialization struct {
 	GuildMaster  MemberID
 	Members      []MemberID
 	Leaders      []MemberID
+	Enquiries    []MemberID
+	WaitingList  []MemberID
 }
 
 func (s GuildSerialization) Deserialize() *Guild {
 	return &Guild{
 		id:           s.ID,
 		name:         s.Name,
+		capacity:     s.Capacity,
 		foundingDate: s.FoundingDate,
 		meetingPlace: s.MeetingPlace,
 		meetingTime:  s.MeetingTime,
@@ -87,11 +109,14 @@ func (s GuildSerialization) Deserialize() *Guild {
 		guildMaster:  s.GuildMaster,
 		members:      s.Members,
 		leaders:      s.Leaders,
+		enquiries:    s.Enquiries,
+		waitingList:  s.WaitingList,
 	}
 }
 
 type GuildID int64
 type GuildName string
+type GuildCapacity int
 type GuildMeetingPlace string
 type GuildMeetingTime string
 type GuildEmail string
