@@ -102,6 +102,7 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 func (c controller) assembleGuildData(guild *model.Guild, members, leaders, enquiries, waitingList []*model.Member, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
 		Name:         string(guild.Name()),
+		Type:         guild.Type().String(),
 		Capacity:     int(guild.Capacity()),
 		Founded:      guild.FoundingDate(),
 		MeetingPlace: string(guild.MeetingPlace()),

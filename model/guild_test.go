@@ -31,6 +31,14 @@ func Test_Guild_Name(t *testing.T) {
 	assert.Equal(t, fixtures.FoundersGuildName(), name)
 }
 
+func Test_Guild_GuildType(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	guildType := guild.Type()
+
+	assert.Equal(t, fixtures.FoundersGuildType(), guildType)
+}
+
 func Test_Guild_Capacity(t *testing.T) {
 	guild := fixtures.FoundersGuild()
 
