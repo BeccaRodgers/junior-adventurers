@@ -1,6 +1,7 @@
 package view
 
 import(
+ "fmt"
  "strconv"
  "time"
 )
@@ -36,7 +37,8 @@ templ Guild(guild GuildData) {
                     <p class="block"><b>Founded:</b> { guild.Founded.UTC().Format(time.DateOnly) }</p>
                     <p class="block"><b>Meeting Place:</b> { guild.MeetingPlace }</p>
                     <p class="block"><b>Meeting Time:</b> { guild.MeetingTime }</p>
-                    <p class="block"><b>Capacity:</b> { strconv.Itoa(guild.Capacity) }</p>
+                    <p class="block"><b>Spaces:</b> { fmt.Sprintf("%v/%v" ,guild.Capacity-len(guild.Members), guild.Capacity) }</p>
+                    <p class="block"><b>Waiting List:</b> { strconv.Itoa(len(guild.WaitingList)) }</p>
                     <p class="block"><b>Contact email:</b> <a href={ templ.URL("mailto:"+guild.Email) }>{ guild.Email }</a></p>
                     </div>
                 </div>
