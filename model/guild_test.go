@@ -31,6 +31,14 @@ func Test_Guild_Name(t *testing.T) {
 	assert.Equal(t, fixtures.FoundersGuildName(), name)
 }
 
+func Test_Guild_Capacity(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	capacity := guild.Capacity()
+
+	assert.Equal(t, fixtures.FoundersGuildCapacity(), capacity)
+}
+
 func Test_Guild_FoundingDate(t *testing.T) {
 	guild := fixtures.FoundersGuild()
 
@@ -85,4 +93,20 @@ func Test_Guild_GuildMaster(t *testing.T) {
 	guildMaster := guild.GuildMaster()
 
 	assert.Equal(t, fixtures.FoundersGuildGuildMaster(), guildMaster)
+}
+
+func Test_Guild_Enquiries(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	enquiries := guild.Enquiries()
+
+	assert.Equal(t, fixtures.FoundersGuildEnquiries(), enquiries)
+}
+
+func Test_Guild_WaitingList(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+
+	waitingList := guild.WaitingList()
+
+	assert.Equal(t, fixtures.FoundersGuildWaitingList(), waitingList)
 }

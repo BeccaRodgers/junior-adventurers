@@ -40,7 +40,7 @@ func NewMember(memberSpecies []model.MemberSpecies) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">New Member Details</h1></div><div class=\"container\"><div class=\"field\"><label class=\"label\">Name</label><div class=\"control\"><input class=\"input\" type=\"text\" placeholder=\"Nanny Ogg\"></div></div><div class=\"field\"><label class=\"label\">Date of Birth</label><div class=\"control\"><input class=\"input\" type=\"date\"></div></div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div class=\"select\"><select><option>Select Species</option> ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">New Member Details</h1></div><div class=\"container\"><div class=\"field\"><label class=\"label\">Name</label><div class=\"control\"><input class=\"input\" type=\"text\" placeholder=\"Tiffany Aching\"></div></div><div class=\"field\"><label class=\"label\">Date of Birth</label><div class=\"control\"><input class=\"input\" type=\"date\"></div></div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div class=\"select\"><select><option>Select Species</option> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

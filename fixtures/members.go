@@ -106,6 +106,45 @@ func Alex() *model.Member {
 	}.Deserialize()
 }
 
+func CarlosID() model.MemberID {
+	return 7
+}
+
+func Carlos() *model.Member {
+	return model.MemberSerialization{
+		ID:      CarlosID(),
+		Name:    "Carlos",
+		DOB:     time.Date(1984, 9, 10, 0, 0, 0, 0, time.UTC),
+		Species: model.Werewolf,
+	}.Deserialize()
+}
+
+func ErikaID() model.MemberID {
+	return 8
+}
+
+func Erika() *model.Member {
+	return model.MemberSerialization{
+		ID:      ErikaID(),
+		Name:    "Erika",
+		DOB:     time.Date(2010, 6, 10, 0, 0, 0, 0, time.UTC),
+		Species: model.Human,
+	}.Deserialize()
+}
+
+func FredID() model.MemberID {
+	return 9
+}
+
+func Fred() *model.Member {
+	return model.MemberSerialization{
+		ID:      FredID(),
+		Name:    "Fred",
+		DOB:     time.Date(2010, 6, 10, 0, 0, 0, 0, time.UTC),
+		Species: model.Human,
+	}.Deserialize()
+}
+
 func InsertMembers(ctx context.Context, guilds model.MemberRepository) error {
 	var errs []error
 	for _, member := range []*model.Member{
@@ -115,6 +154,9 @@ func InsertMembers(ctx context.Context, guilds model.MemberRepository) error {
 		David(),
 		Beyonce(),
 		Alex(),
+		Carlos(),
+		Erika(),
+		Fred(),
 	} {
 		if err := guilds.Insert(ctx, member); err != nil {
 			errs = append(errs, err)
