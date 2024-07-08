@@ -4,6 +4,7 @@ import "time"
 
 type GuildData struct {
 	Name         string
+	Capacity     int
 	Founded      time.Time
 	MeetingPlace string
 	MeetingTime  string
@@ -11,6 +12,8 @@ type GuildData struct {
 	GuildMaster  GuildMaster
 	Leaders      []Leader
 	Members      []Member
+	Enquiries    []Member
+	WaitingList  []Member
 }
 
 type Leader struct {

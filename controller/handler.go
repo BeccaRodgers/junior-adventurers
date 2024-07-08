@@ -75,13 +75,34 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	viewModel := c.assembleGuildData(guild, members, leaders, guildMaster)
+	var enquiries []*model.Member
+	for _, memberID := range guild.Enquiries() {
+		member, err := c.members.Get(ctx, memberID)
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		enquiries = append(enquiries, member)
+	}
+
+	var waitingList []*model.Member
+	for _, memberID := range guild.WaitingList() {
+		member, err := c.members.Get(ctx, memberID)
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		waitingList = append(waitingList, member)
+	}
+
+	viewModel := c.assembleGuildData(guild, members, leaders, enquiries, waitingList, guildMaster)
 	_ = view.Guild(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild, members []*model.Member, leaders []*model.Member, guildMaster *model.Member) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members, leaders, enquiries, waitingList []*model.Member, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
 		Name:         string(guild.Name()),
+		Capacity:     int(guild.Capacity()),
 		Founded:      guild.FoundingDate(),
 		MeetingPlace: string(guild.MeetingPlace()),
 		MeetingTime:  string(guild.MeetingTime()),
@@ -90,8 +111,10 @@ func (c controller) assembleGuildData(guild *model.Guild, members []*model.Membe
 			Name:  string(guildMaster.Name()),
 			Image: string(guildMaster.Image()),
 		},
-		Leaders: c.assembleLeaders(leaders),
-		Members: c.assembleMembers(members),
+		Leaders:     c.assembleLeaders(leaders),
+		Members:     c.assembleMembers(members),
+		Enquiries:   c.assembleMembers(enquiries),
+		WaitingList: c.assembleMembers(waitingList),
 	}
 }
 
