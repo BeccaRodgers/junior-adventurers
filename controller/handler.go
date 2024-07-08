@@ -76,23 +76,19 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var enquiries []*model.Member
-	for _, memberID := range guild.Enquiries() {
-		member, err := c.members.Get(ctx, memberID)
-		if err != nil {
-			httperror.EncodeToText(w, err)
-			return
-		}
-		enquiries = append(enquiries, member)
-	}
-
 	var waitingList []*model.Member
-	for _, memberID := range guild.WaitingList() {
+	for memberID, status := range guild.Enquiries() {
 		member, err := c.members.Get(ctx, memberID)
 		if err != nil {
 			httperror.EncodeToText(w, err)
 			return
 		}
-		waitingList = append(waitingList, member)
+		switch status {
+		case model.Enquired:
+			enquiries = append(enquiries, member)
+		case model.WaitingList:
+			waitingList = append(waitingList, member)
+		}
 	}
 
 	viewModel := c.assembleGuildData(guild, members, leaders, enquiries, waitingList, guildMaster)

@@ -14,8 +14,7 @@ type Guild struct {
 	guildMaster  MemberID
 	members      []MemberID
 	leaders      []MemberID
-	enquiries    []MemberID
-	waitingList  []MemberID
+	enquiries    GuildEnquiries
 }
 
 func (g *Guild) ID() GuildID {
@@ -62,12 +61,8 @@ func (g *Guild) Leaders() []MemberID {
 	return g.leaders
 }
 
-func (g *Guild) Enquiries() []MemberID {
+func (g *Guild) Enquiries() GuildEnquiries {
 	return g.enquiries
-}
-
-func (g *Guild) WaitingList() []MemberID {
-	return g.waitingList
 }
 
 func (g *Guild) Serialize() GuildSerialization {
@@ -84,7 +79,6 @@ func (g *Guild) Serialize() GuildSerialization {
 		Members:      g.members,
 		Leaders:      g.leaders,
 		Enquiries:    g.enquiries,
-		WaitingList:  g.waitingList,
 	}
 }
 
@@ -100,8 +94,7 @@ type GuildSerialization struct {
 	GuildMaster  MemberID
 	Members      []MemberID
 	Leaders      []MemberID
-	Enquiries    []MemberID
-	WaitingList  []MemberID
+	Enquiries    GuildEnquiries
 }
 
 func (s GuildSerialization) Deserialize() *Guild {
@@ -118,7 +111,6 @@ func (s GuildSerialization) Deserialize() *Guild {
 		members:      s.Members,
 		leaders:      s.Leaders,
 		enquiries:    s.Enquiries,
-		waitingList:  s.WaitingList,
 	}
 }
 
@@ -128,6 +120,7 @@ type GuildCapacity int
 type GuildMeetingPlace string
 type GuildMeetingTime string
 type GuildEmail string
+type GuildEnquiries map[MemberID]EnquiryStatus
 type GuildType int64
 
 const (
@@ -167,3 +160,10 @@ func (t GuildType) AgeRange() (min, max int) {
 		return 0, 0
 	}
 }
+
+type EnquiryStatus int64
+
+const (
+	Enquired EnquiryStatus = iota
+	WaitingList
+)
