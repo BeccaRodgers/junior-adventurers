@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+      Junior Adventurers
+    </title>
+    <link rel="stylesheet" href="/static/style.min.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="/static/htmx.min.js"></script>
+  </head>
+  <body hx-target="this">
+    <section class="section">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Founder&#39;s Guild Fledgling Unit
+        </h1>
+      </div>
+      <br>
+      <div class="container">
+        <p class="block">
+          <b>
+            Spaces:
+          </b>
+          4/20
+        </p>
+        <p class="block">
+          <b>
+            Enquiries:
+          </b>
+          2
+        </p>
+        <p class="block">
+          <b>
+            Waiting List:
+          </b>
+          1
+        </p>
+        <h2 class="subtitle has-text-centered">
+          Pending Enquiries
+        </h2>
+        <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                Species
+              </th>
+              <th>
+                Age
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Carlos
+              </td>
+              <td>
+                Werewolf
+              </td>
+              <td>
+                39
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Erika
+              </td>
+              <td>
+                Human
+              </td>
+              <td>
+                12
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2 class="subtitle has-text-centered">
+          Waiting List
+        </h2>
+        <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>
+                Name
+              </th>
+              <th>
+                Species
+              </th>
+              <th>
+                Age
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Fred
+              </td>
+              <td>
+                Human
+              </td>
+              <td>
+                9
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="button is-link" hx-get="/" hx-push-url="true">
+          Home
+        </button>
+        <button class="button is-link" hx-get="/guilds/1" hx-push-url="true">
+          Back to Guild
+        </button>
+      </div>
+    </section>
+  </body>
+</html>

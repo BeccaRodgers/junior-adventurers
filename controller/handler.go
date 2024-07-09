@@ -21,6 +21,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
 	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
+	controller.HandleFunc("GET /guilds/{guildID}/enquiries", controller.getGuildEnquiries)
 	return controller
 }
 
@@ -75,6 +76,38 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	var waitingList []*model.Member
+	for memberID, status := range guild.Enquiries() {
+		if status == model.WaitingList {
+			member, err := c.members.Get(ctx, memberID)
+			if err != nil {
+				httperror.EncodeToText(w, err)
+				return
+			}
+			waitingList = append(waitingList, member)
+		}
+	}
+
+	viewModel := c.assembleGuildData(guild, members, leaders, waitingList, guildMaster)
+	_ = view.Guild(viewModel).Render(r.Context(), w)
+}
+
+func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idString := r.PathValue("guildID")
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		httperror.EncodeToText(w, apperror.Validationf("invalid guild ID: %v", idString))
+		return
+	}
+
+	guild, err := c.guilds.Get(ctx, model.GuildID(id))
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
 	var enquiries []*model.Member
 	var waitingList []*model.Member
 	for memberID, status := range guild.Enquiries() {
@@ -91,12 +124,13 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	viewModel := c.assembleGuildData(guild, members, leaders, enquiries, waitingList, guildMaster)
-	_ = view.Guild(viewModel).Render(r.Context(), w)
+	viewModel := c.assembleGuildEnquiriesData(guild, enquiries, waitingList)
+	_ = view.GuildEnquiries(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild, members, leaders, enquiries, waitingList []*model.Member, guildMaster *model.Member) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members, leaders, waitingList []*model.Member, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
+		ID:           int(guild.ID()),
 		Name:         string(guild.Name()),
 		Type:         guild.Type().String(),
 		Capacity:     int(guild.Capacity()),
@@ -108,8 +142,19 @@ func (c controller) assembleGuildData(guild *model.Guild, members, leaders, enqu
 			Name:  string(guildMaster.Name()),
 			Image: string(guildMaster.Image()),
 		},
-		Leaders:     c.assembleLeaders(leaders),
-		Members:     c.assembleMembers(members),
+		Leaders:        c.assembleLeaders(leaders),
+		Members:        c.assembleMembers(members),
+		WaitingListLen: len(waitingList),
+	}
+}
+
+func (c controller) assembleGuildEnquiriesData(guild *model.Guild, enquiries, waitingList []*model.Member) view.GuildEnquiriesData {
+	return view.GuildEnquiriesData{
+		ID:          int(guild.ID()),
+		Name:        string(guild.Name()),
+		Type:        guild.Type().String(),
+		Capacity:    int(guild.Capacity()),
+		NumMembers:  len(guild.Members()),
 		Enquiries:   c.assembleMembers(enquiries),
 		WaitingList: c.assembleMembers(waitingList),
 	}
