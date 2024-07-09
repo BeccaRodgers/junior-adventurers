@@ -6,7 +6,7 @@ toolchain go1.22.4
 
 require (
 	artk.dev v0.3.0
-	github.com/a-h/templ v0.2.731
+	github.com/a-h/templ v0.2.747
 	github.com/air-verse/air v1.52.3
 	github.com/approvals/go-approval-tests v0.0.0-20240417152556-434b9105e958
 	github.com/stretchr/testify v1.9.0
@@ -17,7 +17,7 @@ require (
 	dario.cat/mergo v1.0.0 // indirect
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
 	github.com/a-h/parse v0.0.0-20240121214402-3caf7543159a // indirect
-	github.com/a-h/protocol v0.0.0-20230224160810-b4eec67c1c22 // indirect
+	github.com/a-h/protocol v0.0.0-20240704131721-1e461c188041 // indirect
 	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/bep/godartsass v1.2.0 // indirect
@@ -52,7 +52,7 @@ require (
 	golang.org/x/mod v0.17.0 // indirect
 	golang.org/x/net v0.24.0 // indirect
 	golang.org/x/sync v0.6.0 // indirect
-	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/sys v0.21.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.18.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
