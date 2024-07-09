@@ -77,6 +77,9 @@
                 foundersguild@example.com
               </a>
             </p>
+            <button class="button is-link" hx-get="/guilds/1/enquiries" hx-push-url="true">
+              Manage Enquiries
+            </button>
           </div>
         </div>
         <h2 class="subtitle has-text-centered">

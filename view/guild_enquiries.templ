@@ -1,0 +1,68 @@
+package view
+
+import(
+ "fmt"
+ "strconv"
+)
+
+templ GuildEnquiries(guild GuildEnquiriesData) {
+    @Root() {
+        <section class="section">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    { fmt.Sprintf("%v %v Unit", guild.Name, guild.Type) }
+                </h1>
+            </div>
+            <br>
+            <div class="container">
+                <p class="block"><b>Spaces:</b> { fmt.Sprintf("%v/%v" ,guild.NumMembers, guild.Capacity) }</p>
+                <p class="block"><b>Enquiries:</b> { strconv.Itoa(len(guild.Enquiries)) }</p>
+                <p class="block"><b>Waiting List:</b> { strconv.Itoa(len(guild.WaitingList)) }</p>
+                <h2 class="subtitle has-text-centered">
+                    Pending Enquiries
+                </h2>
+                <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    for _, enquiry := range guild.Enquiries {
+                        <tr>
+                            <td>{ enquiry.Name }</td>
+                            <td>{ enquiry.Species }</td>
+                            <td>{ strconv.Itoa(enquiry.Age) }</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <h2 class="subtitle has-text-centered">
+                    Waiting List
+                </h2>
+                <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Species</th>
+                        <th>Age</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    for _, member := range guild.WaitingList {
+                        <tr>
+                            <td>{ member.Name }</td>
+                            <td>{ member.Species }</td>
+                            <td>{ strconv.Itoa(member.Age) }</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
+                <button class="button is-link" hx-get={ fmt.Sprintf("/guilds/%v", guild.ID) } hx-push-url="true">Back to Guild</button>
+            </div>
+        </section>
+    }
+}
