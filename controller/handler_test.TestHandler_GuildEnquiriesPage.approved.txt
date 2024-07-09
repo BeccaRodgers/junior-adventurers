@@ -24,7 +24,7 @@
           <b>
             Spaces:
           </b>
-          4/20
+          16/20
         </p>
         <p class="block">
           <b>

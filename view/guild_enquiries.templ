@@ -15,7 +15,7 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
             </div>
             <br>
             <div class="container">
-                <p class="block"><b>Spaces:</b> { fmt.Sprintf("%v/%v" ,guild.NumMembers, guild.Capacity) }</p>
+                <p class="block"><b>Spaces:</b> { fmt.Sprintf("%v/%v", guild.Capacity-guild.NumMembers, guild.Capacity) }</p>
                 <p class="block"><b>Enquiries:</b> { strconv.Itoa(len(guild.Enquiries)) }</p>
                 <p class="block"><b>Waiting List:</b> { strconv.Itoa(len(guild.WaitingList)) }</p>
                 <h2 class="subtitle has-text-centered">

@@ -12,13 +12,9 @@ type GuildData struct {
 	MeetingTime    string
 	Email          string
 	GuildMaster    GuildMaster
-	Leaders        []Leader
+	Leaders        []Member
 	Members        []Member
 	WaitingListLen int
-}
-
-type Leader struct {
-	Member
 }
 
 type Member struct {
