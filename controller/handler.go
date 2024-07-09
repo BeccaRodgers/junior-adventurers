@@ -3,11 +3,13 @@ package controller
 import (
 	"artk.dev/apperror"
 	"artk.dev/httperror"
+	"cmp"
 	"github.com/a-h/templ"
 	"junior-adventurers/model"
 	"junior-adventurers/static"
 	"junior-adventurers/view"
 	"net/http"
+	"slices"
 	"strconv"
 )
 
@@ -76,15 +78,10 @@ func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var waitingList []*model.Member
-	for memberID, status := range guild.Enquiries() {
+	var waitingList int
+	for _, status := range guild.Enquiries() {
 		if status == model.WaitingList {
-			member, err := c.members.Get(ctx, memberID)
-			if err != nil {
-				httperror.EncodeToText(w, err)
-				return
-			}
-			waitingList = append(waitingList, member)
+			waitingList++
 		}
 	}
 
@@ -128,7 +125,7 @@ func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 	_ = view.GuildEnquiries(viewModel).Render(r.Context(), w)
 }
 
-func (c controller) assembleGuildData(guild *model.Guild, members, leaders, waitingList []*model.Member, guildMaster *model.Member) view.GuildData {
+func (c controller) assembleGuildData(guild *model.Guild, members, leaders []*model.Member, waitingList int, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
 		ID:           int(guild.ID()),
 		Name:         string(guild.Name()),
@@ -142,9 +139,9 @@ func (c controller) assembleGuildData(guild *model.Guild, members, leaders, wait
 			Name:  string(guildMaster.Name()),
 			Image: string(guildMaster.Image()),
 		},
-		Leaders:        c.assembleLeaders(leaders),
+		Leaders:        c.assembleMembers(leaders),
 		Members:        c.assembleMembers(members),
-		WaitingListLen: len(waitingList),
+		WaitingListLen: waitingList,
 	}
 }
 
@@ -169,19 +166,9 @@ func (c controller) assembleMembers(members []*model.Member) []view.Member {
 			Species: member.Species().String(),
 		})
 	}
-	return viewMembers
-}
-
-func (c controller) assembleLeaders(leaders []*model.Member) []view.Leader {
-	var viewLeaders []view.Leader
-	for _, leader := range leaders {
-		viewLeaders = append(viewLeaders, view.Leader{
-			Member: view.Member{
-				Name:    string(leader.Name()),
-				Age:     leader.Age(),
-				Species: leader.Species().String(),
-			},
-		})
+	sortFunc := func(a, b view.Member) int {
+		return cmp.Compare(b.Age, a.Age)
 	}
-	return viewLeaders
+	slices.SortStableFunc(viewMembers, sortFunc)
+	return viewMembers
 }

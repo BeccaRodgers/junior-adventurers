@@ -99,18 +99,18 @@
           <tbody>
             <tr>
               <td>
-                Alex
-              </td>
-              <td>
-                Human
-              </td>
-            </tr>
-            <tr>
-              <td>
                 Beyoncé
               </td>
               <td>
                 Dwarf
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Alex
+              </td>
+              <td>
+                Human
               </td>
             </tr>
           </tbody>
@@ -133,17 +133,6 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                Angela
-              </td>
-              <td>
-                Human
-              </td>
-              <td>
-                10
-              </td>
-            </tr>
             <tr>
               <td>
                 Bob
@@ -175,6 +164,17 @@
               </td>
               <td>
                 11
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Angela
+              </td>
+              <td>
+                Human
+              </td>
+              <td>
+                10
               </td>
             </tr>
           </tbody>
