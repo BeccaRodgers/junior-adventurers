@@ -1,0 +1,22 @@
+package view
+
+import "strconv"
+
+templ Member(member MemberData) {
+    @Root() {
+        <section class="section">
+            <div class="container has-text-centered">
+                <h1 class="title">
+                    { member.Name }
+                </h1>
+            </div>
+            <br>
+            <div class="container">
+                <p class="block"><b>Member ID:</b> { strconv.Itoa(member.ID) }</p>
+                <p class="block"><b>Age:</b> { strconv.Itoa(member.Age) }</p>
+                <p class="block"><b>Species:</b> { member.Species }</p>
+                <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
+            </div>
+        </section>
+    }
+}

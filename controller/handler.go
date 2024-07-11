@@ -22,6 +22,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
 	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
+	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
 	controller.HandleFunc("GET /guilds/{guildID}/enquiries", controller.getGuildEnquiries)
 	return controller
@@ -31,6 +32,26 @@ type controller struct {
 	*http.ServeMux
 	guilds  model.GuildRepository
 	members model.MemberRepository
+}
+
+func (c controller) getMember(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	idString := r.PathValue("memberID")
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		httperror.EncodeToText(w, apperror.Validationf("invalid member ID: %v", idString))
+		return
+	}
+
+	member, err := c.members.Get(ctx, model.MemberID(id))
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	viewModel := c.assembleMember(member)
+	_ = view.Member(viewModel).Render(r.Context(), w)
 }
 
 func (c controller) getGuild(w http.ResponseWriter, r *http.Request) {
@@ -157,18 +178,23 @@ func (c controller) assembleGuildEnquiriesData(guild *model.Guild, enquiries, wa
 	}
 }
 
-func (c controller) assembleMembers(members []*model.Member) []view.Member {
-	var viewMembers []view.Member
+func (c controller) assembleMembers(members []*model.Member) []view.MemberData {
+	var viewMembers []view.MemberData
 	for _, member := range members {
-		viewMembers = append(viewMembers, view.Member{
-			Name:    string(member.Name()),
-			Age:     member.Age(),
-			Species: member.Species().String(),
-		})
+		viewMembers = append(viewMembers, c.assembleMember(member))
 	}
-	sortFunc := func(a, b view.Member) int {
+	sortFunc := func(a, b view.MemberData) int {
 		return cmp.Compare(b.Age, a.Age)
 	}
 	slices.SortStableFunc(viewMembers, sortFunc)
 	return viewMembers
+}
+
+func (c controller) assembleMember(member *model.Member) view.MemberData {
+	return view.MemberData{
+		ID:      int(member.ID()),
+		Name:    string(member.Name()),
+		Age:     member.Age(),
+		Species: member.Species().String(),
+	}
 }

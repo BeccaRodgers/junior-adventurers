@@ -30,6 +30,10 @@ func TestHandler_NewMemberPage(t *testing.T) {
 	approveGetPage(t, "/members")
 }
 
+func TestHandler_MemberPage(t *testing.T) {
+	approveGetPage(t, "/members/1")
+}
+
 func approveGetPage(t *testing.T, path string) {
 	t.Helper()
 
