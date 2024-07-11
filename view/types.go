@@ -23,6 +23,13 @@ type Member struct {
 	Species string
 }
 
+type NewMemberForm struct {
+	Name    string
+	DOB     time.Time
+	Species string
+	Guild   int
+}
+
 type GuildMaster struct {
 	Name  string
 	Image string
