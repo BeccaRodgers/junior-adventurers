@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"slices"
 	"strconv"
+	"time"
 )
 
 func Handler(guilds model.GuildRepository, members model.MemberRepository) http.Handler {
@@ -22,6 +23,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
 	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
+	controller.HandleFunc("POST /members", controller.postMember)
 	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
 	controller.HandleFunc("GET /guilds/{guildID}/enquiries", controller.getGuildEnquiries)
@@ -146,6 +148,51 @@ func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 	_ = view.GuildEnquiries(viewModel).Render(r.Context(), w)
 }
 
+func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	//guildId, err := strconv.Atoi(r.Form.Get("guild"))
+	//if err != nil {
+	//	httperror.EncodeToText(w, err)
+	//	return
+	//}
+
+	err := r.ParseForm()
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	dob, err := time.Parse(time.DateOnly, r.Form.Get("dob"))
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+	memberForm := view.NewMemberForm{
+		Name:    r.Form.Get("name"),
+		DOB:     dob,
+		Species: r.Form.Get("species"),
+		//Guild:   guildId,
+	}
+
+	member, err := c.assembleNewMember(memberForm)
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	err = c.members.Insert(ctx, member)
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	// TODO add member to guild enquiries
+
+	viewModel := c.assembleMember(member)
+	_ = view.Member(viewModel).Render(r.Context(), w) // TODO update browser URL to match
+}
+
 func (c controller) assembleGuildData(guild *model.Guild, members, leaders []*model.Member, waitingList int, guildMaster *model.Member) view.GuildData {
 	return view.GuildData{
 		ID:           int(guild.ID()),
@@ -197,4 +244,13 @@ func (c controller) assembleMember(member *model.Member) view.MemberData {
 		Age:     member.Age(),
 		Species: member.Species().String(),
 	}
+}
+
+func (c controller) assembleNewMember(member view.NewMemberForm) (*model.Member, error) {
+	return model.MemberSerialization{
+		ID:      model.MemberID(11), // TODO use next available id
+		Name:    model.MemberName(member.Name),
+		DOB:     member.DOB,
+		Species: model.UnmarshalMemberSpecies(member.Species),
+	}.Deserialize(), nil
 }

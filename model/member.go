@@ -80,7 +80,8 @@ type MemberSpecies int64
 type MemberImage string
 
 const (
-	Human MemberSpecies = iota
+	Unknown MemberSpecies = iota
+	Human
 	Dwarf
 	Werewolf
 )
@@ -95,6 +96,19 @@ func (s MemberSpecies) String() string {
 		return "Werewolf"
 	default:
 		return "Unknown Species"
+	}
+}
+
+func UnmarshalMemberSpecies(species string) MemberSpecies {
+	switch species {
+	case "Human":
+		return Human
+	case "Dwarf":
+		return Dwarf
+	case "Werewolf":
+		return Werewolf
+	default:
+		return Unknown
 	}
 }
 
