@@ -23,8 +23,8 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
 	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
-	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("POST /members", controller.postMember)
+	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
 	controller.HandleFunc("GET /guilds/{guildID}/enquiries", controller.getGuildEnquiries)
 	return controller
@@ -223,14 +223,6 @@ func (c controller) assembleMembers(members []*model.Member) []view.MemberData {
 	return viewMembers
 }
 
-func (c controller) reassembleMember(member view.NewMemberForm) *model.Member {
-	return model.MemberSerialization{
-		Name:    model.MemberName(member.Name),
-		DOB:     member.DOB,
-		Species: model.UnmarshalMemberSpecies(member.Species),
-	}.Deserialize()
-}
-
 func (c controller) assembleMember(member *model.Member) view.MemberData {
 	return view.MemberData{
 		ID:      int(member.ID()),
@@ -238,4 +230,12 @@ func (c controller) assembleMember(member *model.Member) view.MemberData {
 		Age:     member.Age(),
 		Species: member.Species().String(),
 	}
+}
+
+func (c controller) reassembleMember(member view.NewMemberForm) *model.Member {
+	return model.MemberSerialization{
+		Name:    model.MemberName(member.Name),
+		DOB:     member.DOB,
+		Species: model.UnmarshalMemberSpecies(member.Species),
+	}.Deserialize()
 }
