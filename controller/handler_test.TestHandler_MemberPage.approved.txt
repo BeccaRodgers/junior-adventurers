@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+      Junior Adventurers
+    </title>
+    <link rel="stylesheet" href="/static/style.min.css">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="/static/htmx.min.js"></script>
+  </head>
+  <body hx-target="this">
+    <section class="section">
+      <div class="container has-text-centered">
+        <h1 class="title">
+          Angela
+        </h1>
+      </div>
+      <br>
+      <div class="container">
+        <p class="block">
+          <b>
+            Member ID:
+          </b>
+          1
+        </p>
+        <p class="block">
+          <b>
+            Age:
+          </b>
+          10
+        </p>
+        <p class="block">
+          <b>
+            Species:
+          </b>
+          Human
+        </p>
+        <button class="button is-link" hx-get="/" hx-push-url="true">
+          Home
+        </button>
+      </div>
+    </section>
+  </body>
+</html>
