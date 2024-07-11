@@ -11,23 +11,24 @@ templ NewMember(memberSpecies []model.MemberSpecies) {
                 </h1>
             </div>
             <div class="container">
+            <form action="/members" method="post" id="new-member-form">
                 <div class="field">
                   <label class="label">Name</label>
                   <div class="control">
-                    <input class="input" type="text" placeholder="Tiffany Aching">
+                    <input class="input" type="text" name="name" placeholder="Tiffany Aching">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Date of Birth</label>
                   <div class="control">
-                    <input class="input" type="date">
+                    <input class="input" type="date" name="dob">
                   </div>
                 </div>
                 <div class="field">
                   <label class="label">Species</label>
                   <div class="control">
                     <div class="select">
-                        <select>
+                        <select name="species">
                           <option>Select Species</option>
                           for _, species := range memberSpecies {
                             <option>{ species.String() }</option>
@@ -40,7 +41,7 @@ templ NewMember(memberSpecies []model.MemberSpecies) {
                   <label class="label">Guild</label>
                   <div class="control">
                     <div class="select">
-                        <select>
+                        <select name="guild">
                             <option>Select Guild</option>
                             <option>Founder's Guild</option>
                         </select>
@@ -52,9 +53,10 @@ templ NewMember(memberSpecies []model.MemberSpecies) {
                         <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
                     </p>
                     <p class="control">
-                        <button class="button is-primary" >Submit</button>
+                        <button type="submit" class="button is-primary" form="new-member-form" value="submit">Submit</button>
                     </p>
                 </div>
+            </form>
             </div>
         </section>
     }

@@ -151,11 +151,18 @@ func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	guildId, err := strconv.Atoi(r.Form.Get("guild"))
+	//guildId, err := strconv.Atoi(r.Form.Get("guild"))
+	//if err != nil {
+	//	httperror.EncodeToText(w, err)
+	//	return
+	//}
+
+	err := r.ParseForm()
 	if err != nil {
 		httperror.EncodeToText(w, err)
 		return
 	}
+
 	dob, err := time.Parse(time.DateOnly, r.Form.Get("dob"))
 	if err != nil {
 		httperror.EncodeToText(w, err)
@@ -165,10 +172,14 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		Name:    r.Form.Get("name"),
 		DOB:     dob,
 		Species: r.Form.Get("species"),
-		Guild:   guildId,
+		//Guild:   guildId,
 	}
 
-	member := c.reassembleMember(memberForm)
+	member, err := c.assembleNewMember(memberForm)
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
 
 	err = c.members.Insert(ctx, member)
 	if err != nil {
@@ -177,6 +188,9 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// TODO add member to guild enquiries
+
+	viewModel := c.assembleMember(member)
+	_ = view.Member(viewModel).Render(r.Context(), w) // TODO update browser URL to match
 }
 
 func (c controller) assembleGuildData(guild *model.Guild, members, leaders []*model.Member, waitingList int, guildMaster *model.Member) view.GuildData {
@@ -232,10 +246,11 @@ func (c controller) assembleMember(member *model.Member) view.MemberData {
 	}
 }
 
-func (c controller) reassembleMember(member view.NewMemberForm) *model.Member {
+func (c controller) assembleNewMember(member view.NewMemberForm) (*model.Member, error) {
 	return model.MemberSerialization{
+		ID:      model.MemberID(11), // TODO use next available id
 		Name:    model.MemberName(member.Name),
 		DOB:     member.DOB,
 		Species: model.UnmarshalMemberSpecies(member.Species),
-	}.Deserialize()
+	}.Deserialize(), nil
 }
