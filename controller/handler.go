@@ -4,6 +4,7 @@ import (
 	"artk.dev/apperror"
 	"artk.dev/httperror"
 	"cmp"
+	"fmt"
 	"github.com/a-h/templ"
 	"junior-adventurers/model"
 	"junior-adventurers/static"
@@ -187,10 +188,12 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO add member to guild enquiries
+	// TODO add member to guild enquiries.
 
+	w.Header().Add("HX-Push-Url", fmt.Sprintf("/members/%v", member.ID()))
+	w.WriteHeader(http.StatusCreated)
 	viewModel := c.assembleMember(member)
-	_ = view.Member(viewModel).Render(r.Context(), w) // TODO update browser URL to match
+	_ = view.Member(viewModel).Render(r.Context(), w)
 }
 
 func (c controller) assembleGuildData(guild *model.Guild, members, leaders []*model.Member, waitingList int, guildMaster *model.Member) view.GuildData {
