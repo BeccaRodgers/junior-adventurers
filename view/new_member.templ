@@ -11,7 +11,7 @@ templ NewMember(memberSpecies []model.MemberSpecies) {
                 </h1>
             </div>
             <div class="container">
-            <form action="/members" method="post" id="new-member-form">
+            <form id="new-member-form">
                 <div class="field">
                   <label class="label">Name</label>
                   <div class="control">
@@ -53,7 +53,15 @@ templ NewMember(memberSpecies []model.MemberSpecies) {
                         <button class="button is-link" hx-get="/" hx-push-url="true">Home</button>
                     </p>
                     <p class="control">
-                        <button type="submit" class="button is-primary" form="new-member-form" value="submit">Submit</button>
+                        <button
+                            hx-post="/members"
+                            type="submit"
+                            class="button is-primary"
+                            form="new-member-form"
+                            value="submit"
+                        >
+                         Submit
+                        </button>
                     </p>
                 </div>
             </form>

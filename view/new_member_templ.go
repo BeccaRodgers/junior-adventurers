@@ -40,7 +40,7 @@ func NewMember(memberSpecies []model.MemberSpecies) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">New Member Details</h1></div><div class=\"container\"><form action=\"/members\" method=\"post\" id=\"new-member-form\"><div class=\"field\"><label class=\"label\">Name</label><div class=\"control\"><input class=\"input\" type=\"text\" name=\"name\" placeholder=\"Tiffany Aching\"></div></div><div class=\"field\"><label class=\"label\">Date of Birth</label><div class=\"control\"><input class=\"input\" type=\"date\" name=\"dob\"></div></div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div class=\"select\"><select name=\"species\"><option>Select Species</option> ")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<section class=\"section\"><div class=\"container has-text-centered\"><h1 class=\"title\">New Member Details</h1></div><div class=\"container\"><form id=\"new-member-form\"><div class=\"field\"><label class=\"label\">Name</label><div class=\"control\"><input class=\"input\" type=\"text\" name=\"name\" placeholder=\"Tiffany Aching\"></div></div><div class=\"field\"><label class=\"label\">Date of Birth</label><div class=\"control\"><input class=\"input\" type=\"date\" name=\"dob\"></div></div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div class=\"select\"><select name=\"species\"><option>Select Species</option> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -63,7 +63,7 @@ func NewMember(memberSpecies []model.MemberSpecies) templ.Component {
 					return templ_7745c5c3_Err
 				}
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div></div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option>Select Guild</option> <option>Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</select></div></div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option>Select Guild</option> <option>Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button hx-post=\"/members\" type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
