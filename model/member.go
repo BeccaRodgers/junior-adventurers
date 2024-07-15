@@ -1,6 +1,9 @@
 package model
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
 type Member struct {
 	id      MemberID
@@ -76,8 +79,13 @@ func (s MemberSerialization) Deserialize() *Member {
 
 func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID) (*Member, error) {
 	// TODO validate inputs
+	name, err := name.Normalize()
+	if err != nil {
+		return nil, fmt.Errorf("invalid member name: %w", err)
+	}
+
 	// TODO enforce rules.
-	
+
 	return &Member{
 		id:      id,
 		name:    name,
@@ -88,7 +96,6 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 }
 
 type MemberID int64
-type MemberName string
 type SpeciesID int64
 type MemberImage string
 
