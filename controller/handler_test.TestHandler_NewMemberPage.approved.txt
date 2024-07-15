@@ -19,74 +19,76 @@
         </h1>
       </div>
       <div class="container">
-        <div class="field">
-          <label class="label">
-            Name
-          </label>
-          <div class="control">
-            <input class="input" type="text" placeholder="Tiffany Aching">
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">
-            Date of Birth
-          </label>
-          <div class="control">
-            <input class="input" type="date">
-          </div>
-        </div>
-        <div class="field">
-          <label class="label">
-            Species
-          </label>
-          <div class="control">
-            <div class="select">
-              <select>
-                <option>
-                  Select Species
-                </option>
-                <option>
-                  Human
-                </option>
-                <option>
-                  Dwarf
-                </option>
-                <option>
-                  Werewolf
-                </option>
-              </select>
+        <form id="new-member-form">
+          <div class="field">
+            <label class="label">
+              Name
+            </label>
+            <div class="control">
+              <input class="input" type="text" name="name" placeholder="Tiffany Aching">
             </div>
           </div>
-        </div>
-        <div class="field">
-          <label class="label">
-            Guild
-          </label>
-          <div class="control">
-            <div class="select">
-              <select>
-                <option>
-                  Select Guild
-                </option>
-                <option>
-                  Founder's Guild
-                </option>
-              </select>
+          <div class="field">
+            <label class="label">
+              Date of Birth
+            </label>
+            <div class="control">
+              <input class="input" type="date" name="dob">
             </div>
           </div>
-        </div>
-        <div class="field is-grouped">
-          <p class="control">
-            <button class="button is-link" hx-get="/" hx-push-url="true">
-              Home
-            </button>
-          </p>
-          <p class="control">
-            <button class="button is-primary">
-              Submit
-            </button>
-          </p>
-        </div>
+          <div class="field">
+            <label class="label">
+              Species
+            </label>
+            <div class="control">
+              <div class="select">
+                <select name="species">
+                  <option>
+                    Select Species
+                  </option>
+                  <option>
+                    Human
+                  </option>
+                  <option>
+                    Dwarf
+                  </option>
+                  <option>
+                    Werewolf
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">
+              Guild
+            </label>
+            <div class="control">
+              <div class="select">
+                <select name="guild">
+                  <option>
+                    Select Guild
+                  </option>
+                  <option>
+                    Founder's Guild
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <p class="control">
+              <button class="button is-link" hx-get="/" hx-push-url="true">
+                Home
+              </button>
+            </p>
+            <p class="control">
+              <button hx-post="/members" type="submit" class="button is-primary" form="new-member-form" value="submit">
+                Submit
+              </button>
+            </p>
+          </div>
+        </form>
       </div>
     </section>
   </body>

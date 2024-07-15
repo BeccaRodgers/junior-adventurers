@@ -21,4 +21,4 @@ jobs:
       - name: Ensure generated files are up to date
         run: ./no-changes.sh
       - name: Run tests
-        run: go test
+        run: go test ./...
