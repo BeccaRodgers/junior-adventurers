@@ -6,7 +6,7 @@ type Member struct {
 	id      MemberID
 	name    MemberName
 	dob     time.Time
-	species MemberSpecies
+	species SpeciesID
 	image   MemberImage
 }
 
@@ -38,7 +38,7 @@ func (m *Member) Age() int {
 	return years
 }
 
-func (m *Member) Species() MemberSpecies {
+func (m *Member) Species() SpeciesID {
 	return m.species
 }
 
@@ -60,7 +60,7 @@ type MemberSerialization struct {
 	ID      MemberID
 	Name    MemberName
 	DOB     time.Time
-	Species MemberSpecies
+	Species SpeciesID
 	Image   MemberImage
 }
 
@@ -74,19 +74,32 @@ func (s MemberSerialization) Deserialize() *Member {
 	}
 }
 
+func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID) (*Member, error) {
+	// TODO validate inputs
+	// TODO enforce rules.
+	
+	return &Member{
+		id:      id,
+		name:    name,
+		dob:     dob,
+		species: speciesID,
+		image:   "",
+	}, nil
+}
+
 type MemberID int64
 type MemberName string
-type MemberSpecies int64
+type SpeciesID int64
 type MemberImage string
 
 const (
-	Unknown MemberSpecies = iota
+	Unknown SpeciesID = iota
 	Human
 	Dwarf
 	Werewolf
 )
 
-func (s MemberSpecies) String() string {
+func (s SpeciesID) String() string {
 	switch s {
 	case Human:
 		return "Human"
@@ -99,7 +112,7 @@ func (s MemberSpecies) String() string {
 	}
 }
 
-func UnmarshalMemberSpecies(species string) MemberSpecies {
+func UnmarshalMemberSpecies(species string) SpeciesID {
 	switch species {
 	case "Human":
 		return Human
@@ -112,8 +125,8 @@ func UnmarshalMemberSpecies(species string) MemberSpecies {
 	}
 }
 
-func MemberSpeciesValues() []MemberSpecies {
-	return []MemberSpecies{
+func MemberSpeciesValues() []SpeciesID {
+	return []SpeciesID{
 		Human,
 		Dwarf,
 		Werewolf,
