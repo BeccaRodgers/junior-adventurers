@@ -19,7 +19,7 @@ func AngelaDOB() time.Time {
 	return time.Date(2014, 1, 7, 0, 0, 0, 0, time.UTC)
 }
 
-func AngelaSpecies() model.MemberSpecies {
+func AngelaSpecies() model.SpeciesID {
 	return model.Human
 }
 

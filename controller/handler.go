@@ -169,14 +169,20 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		httperror.EncodeToText(w, err)
 		return
 	}
-	memberForm := view.NewMemberForm{
+
+	form := view.NewMemberForm{
 		Name:    r.Form.Get("name"),
 		DOB:     dob,
 		Species: r.Form.Get("species"),
 		//Guild:   guildId,
 	}
 
-	member, err := c.assembleNewMember(memberForm)
+	member, err := model.NewMember(
+		model.MemberID(11), // TODO use next available id
+		model.MemberName(form.Name),
+		form.DOB,
+		model.UnmarshalMemberSpecies(form.Species),
+	)
 	if err != nil {
 		httperror.EncodeToText(w, err)
 		return
@@ -247,13 +253,4 @@ func (c controller) assembleMember(member *model.Member) view.MemberData {
 		Age:     member.Age(),
 		Species: member.Species().String(),
 	}
-}
-
-func (c controller) assembleNewMember(member view.NewMemberForm) (*model.Member, error) {
-	return model.MemberSerialization{
-		ID:      model.MemberID(11), // TODO use next available id
-		Name:    model.MemberName(member.Name),
-		DOB:     member.DOB,
-		Species: model.UnmarshalMemberSpecies(member.Species),
-	}.Deserialize(), nil
 }
