@@ -1,6 +1,7 @@
 package model
 
 import (
+	"errors"
 	"fmt"
 	"time"
 )
@@ -84,6 +85,10 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 		return nil, fmt.Errorf("invalid member name: %w", err)
 	}
 
+	if err = ValidateDOB(dob); err != nil {
+		return nil, fmt.Errorf("invalid date of birth: %w", err)
+	}
+
 	// TODO enforce rules.
 
 	return &Member{
@@ -97,3 +102,10 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 
 type MemberID int64
 type MemberImage string
+
+func ValidateDOB(dob time.Time) error {
+	if dob.After(time.Now()) {
+		return errors.New("date of birth can't be in the future")
+	}
+	return nil
+}
