@@ -23,7 +23,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	}
 	controller.Handle("GET /static/*", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
-	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues())))
+	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues(), view.NewMemberForm{}, nil)))
 	controller.HandleFunc("POST /members", controller.postMember)
 	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
@@ -166,8 +166,8 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 
 	dob, err := time.Parse(time.DateOnly, r.Form.Get("dob"))
 	if err != nil {
-		httperror.EncodeToText(w, err)
-		return
+		//httperror.EncodeToText(w, err)
+		//return
 	}
 
 	form := view.NewMemberForm{
@@ -177,14 +177,14 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		//Guild:   guildId,
 	}
 
-	member, err := model.NewMember(
+	member, newMemberErr := model.NewMember(
 		model.MemberID(11), // TODO use next available id
 		model.MemberName(form.Name),
 		form.DOB,
 		model.UnmarshalMemberSpecies(form.Species),
 	)
-	if err != nil {
-		httperror.EncodeToText(w, err)
+	if newMemberErr != nil {
+		_ = view.NewMember(model.MemberSpeciesValues(), form, newMemberErr).Render(r.Context(), w)
 		return
 	}
 

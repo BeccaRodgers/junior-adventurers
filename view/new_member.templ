@@ -1,8 +1,12 @@
 package view
 
-import "junior-adventurers/model"
+import (
+    "fmt"
+    "junior-adventurers/model"
+    "time"
+)
 
-templ NewMember(memberSpecies []model.SpeciesID) {
+templ NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *model.NewMemberError) {
     @Root() {
         <section class="section">
             <div class="container has-text-centered">
@@ -13,16 +17,38 @@ templ NewMember(memberSpecies []model.SpeciesID) {
             <div class="container">
             <form id="new-member-form">
                 <div class="field">
-                  <label class="label">Name</label>
-                  <div class="control">
-                    <input class="input" type="text" name="name" placeholder="Tiffany Aching">
-                  </div>
+                    <label class="label">Name</label>
+                    if errs != nil && errs.Name != nil {
+                        <div class="control">
+                            <input class="input is-danger" type="text" name="name" placeholder="Tiffany Aching" value={ fmt.Sprintf("%v", member.Name) }>
+                        </div>
+                        <p class="help is-danger">
+                            { errs.Name.Error() }
+                        </p>
+                    } else {                    
+                        <div class="control">
+                          <input class="input" type="text" name="name" placeholder="Tiffany Aching" value={ fmt.Sprintf("%v", member.Name) }>
+                        </div>
+                    }
                 </div>
                 <div class="field">
-                  <label class="label">Date of Birth</label>
-                  <div class="control">
-                    <input class="input" type="date" name="dob">
-                  </div>
+                      <label class="label">Date of Birth</label>
+                      if errs != nil && errs.DOB != nil {
+                          <div class="control">
+                            <input class="input is-danger" type="date" name="dob" value={ fmt.Sprintf("%v", member.DOB.Format(time.DateOnly)) }>
+                          </div> 
+                          <p class="help is-danger">
+                              { errs.DOB.Error() }
+                          </p>
+                      } else if !member.DOB.IsZero() {
+                          <div class="control">
+                            <input class="input" type="date" name="dob" value={ fmt.Sprintf("%v", member.DOB.Format(time.DateOnly)) }>
+                          </div>                                      
+                      } else {
+                          <div class="control">
+                            <input class="input" type="date" name="dob">
+                          </div>                       
+                      }
                 </div>
                 <div class="field">
                   <label class="label">Species</label>

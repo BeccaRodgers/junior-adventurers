@@ -25,7 +25,7 @@
               Name
             </label>
             <div class="control">
-              <input class="input" type="text" name="name" placeholder="Tiffany Aching">
+              <input class="input" type="text" name="name" placeholder="Tiffany Aching" value="">
             </div>
           </div>
           <div class="field">

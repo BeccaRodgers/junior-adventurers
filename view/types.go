@@ -31,6 +31,11 @@ type NewMemberForm struct {
 	Guild   int
 }
 
+type NewMemberValidation struct {
+	Name error
+	DOB  error
+}
+
 type GuildMaster struct {
 	Name  string
 	Image string
