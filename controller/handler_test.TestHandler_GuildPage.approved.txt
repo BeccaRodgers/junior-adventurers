@@ -141,6 +141,17 @@
                 Human
               </td>
               <td>
+                13
+              </td>
+            </tr>
+            <tr>
+              <td>
+                David
+              </td>
+              <td>
+                Dwarf
+              </td>
+              <td>
                 12
               </td>
             </tr>
@@ -150,17 +161,6 @@
               </td>
               <td>
                 Werewolf
-              </td>
-              <td>
-                11
-              </td>
-            </tr>
-            <tr>
-              <td>
-                David
-              </td>
-              <td>
-                Dwarf
               </td>
               <td>
                 11
