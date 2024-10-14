@@ -1,5 +1,5 @@
-artk.dev v0.3.0 h1:WzLy8J5AlviqHKLmv/8UvFJVhaFdJw0T2Vqs4BvVDNM=
-artk.dev v0.3.0/go.mod h1:wW8UqHlrzKeVQGGYdpwUISimvlwLPSFobw/nI2Kt+TE=
+artk.dev v0.8.0 h1:QRKYALKPTlRyvuSeXEFVKZnP88DG85Hl292hfc/PLlo=
+artk.dev v0.8.0/go.mod h1:wW8UqHlrzKeVQGGYdpwUISimvlwLPSFobw/nI2Kt+TE=
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 dario.cat/mergo v1.0.0 h1:AGCNq9Evsj31mOgNPcLyXc+4PNABt905YmuqPYYpBWk=
 dario.cat/mergo v1.0.0/go.mod h1:uNxQE+84aUszobStD9th8a29P2fMDhsBdgRYvZOxGmk=
