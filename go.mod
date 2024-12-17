@@ -6,14 +6,14 @@ toolchain go1.22.10
 require (
 	artk.dev v0.3.0
 	github.com/a-h/templ v0.2.793
-	github.com/air-verse/air v1.52.3
+	github.com/air-verse/air v1.61.4
 	github.com/approvals/go-approval-tests v0.0.0-20240417152556-434b9105e958
 	github.com/stretchr/testify v1.9.0
 	github.com/yosssi/gohtml v0.0.0-20201013000340-ee4748c638f4
 )
 
 require (
-	dario.cat/mergo v1.0.0 // indirect
+	dario.cat/mergo v1.0.1 // indirect
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
 	github.com/a-h/parse v0.0.0-20240121214402-3caf7543159a // indirect
 	github.com/a-h/protocol v0.0.0-20240704131721-1e461c188041 // indirect
@@ -24,7 +24,7 @@ require (
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cli/browser v1.3.0 // indirect
 	github.com/cli/safeexec v1.0.1 // indirect
-	github.com/creack/pty v1.1.21 // indirect
+	github.com/creack/pty v1.1.23 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
