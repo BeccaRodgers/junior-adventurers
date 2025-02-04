@@ -64,7 +64,7 @@
                 Werewolf
               </td>
               <td>
-                39
+                40
               </td>
             </tr>
             <tr>
