@@ -146,6 +146,17 @@
             </tr>
             <tr>
               <td>
+                Charlotte
+              </td>
+              <td>
+                Werewolf
+              </td>
+              <td>
+                12
+              </td>
+            </tr>
+            <tr>
+              <td>
                 David
               </td>
               <td>
@@ -157,24 +168,13 @@
             </tr>
             <tr>
               <td>
-                Charlotte
-              </td>
-              <td>
-                Werewolf
-              </td>
-              <td>
-                11
-              </td>
-            </tr>
-            <tr>
-              <td>
                 Angela
               </td>
               <td>
                 Human
               </td>
               <td>
-                10
+                11
               </td>
             </tr>
           </tbody>
