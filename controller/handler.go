@@ -21,7 +21,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 		guilds:   guilds,
 		members:  members,
 	}
-	controller.Handle("GET /static/*", static.Handler())
+	controller.Handle("GET /static/", static.Handler())
 	controller.Handle("GET /", templ.Handler(view.Homepage()))
 	controller.Handle("GET /members", templ.Handler(view.NewMember(model.MemberSpeciesValues(), view.NewMemberForm{}, nil)))
 	controller.HandleFunc("POST /members", controller.postMember)
