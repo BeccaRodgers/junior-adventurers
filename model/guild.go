@@ -167,3 +167,7 @@ const (
 	Enquired EnquiryStatus = iota
 	WaitingList
 )
+
+func (g *Guild) AddToEnquiries(id MemberID) {
+	g.enquiries[id] = Enquired
+}

@@ -152,13 +152,13 @@ func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 
-	//guildId, err := strconv.Atoi(r.Form.Get("guild"))
-	//if err != nil {
-	//	httperror.EncodeToText(w, err)
-	//	return
-	//}
-
 	err := r.ParseForm()
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	guildId, err := strconv.Atoi(r.Form.Get("guild"))
 	if err != nil {
 		httperror.EncodeToText(w, err)
 		return
@@ -174,7 +174,7 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		Name:    r.Form.Get("name"),
 		DOB:     dob,
 		Species: r.Form.Get("species"),
-		//Guild:   guildId,
+		Guild:   guildId,
 	}
 
 	member, newMemberErr := model.NewMember(
@@ -194,7 +194,14 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO add member to guild enquiries.
+	err = c.guilds.Update(ctx, model.GuildID(guildId), func(x *model.Guild) error {
+		x.AddToEnquiries(member.ID())
+		return nil
+	})
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
 
 	w.Header().Add("HX-Push-Url", fmt.Sprintf("/members/%v", member.ID()))
 	w.WriteHeader(http.StatusCreated)
