@@ -19,16 +19,18 @@ templ Guild(guild GuildData) {
                 <div class="columns">
                     <div class="column is-one-third">
                         <div class="card">
-                            if guild.GuildMaster.Image != "" {
                             <div class="card-image">
                                 <figure class="image is-1by1">
                                     <img
-                                    src={ "/static/"+guild.GuildMaster.Image }
+                                    if guild.GuildMaster.Image != "" {
+                                        src={ "/static/"+guild.GuildMaster.Image }
+                                    } else {
+                                        src="/static/default_image.png"
+                                    }
                                     alt={ guild.GuildMaster.Name }
                                     />
                                 </figure>
                             </div>
-                            }
                             <div class="card-content">
                                 <p class="title">{ guild.GuildMaster.Name }</p>
                                 <p class="subtitle">GuildMaster</p>
