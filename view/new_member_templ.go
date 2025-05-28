@@ -220,7 +220,7 @@ func NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mode
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option>Select Guild</option> <option>Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button hx-post=\"/members\" type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option value=\"0\">Select Guild</option> <option value=\"1\">Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button hx-post=\"/members\" type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
