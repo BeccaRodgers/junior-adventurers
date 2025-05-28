@@ -66,10 +66,10 @@
             <div class="control">
               <div class="select">
                 <select name="guild">
-                  <option>
+                  <option value="0">
                     Select Guild
                   </option>
-                  <option>
+                  <option value="1">
                     Founder's Guild
                   </option>
                 </select>
