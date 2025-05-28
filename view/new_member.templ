@@ -62,7 +62,13 @@ templ NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mod
                 <div class="field">
                   <label class="label">Species</label>
                   <div class="control">
-                    <div class="select">
+                    <div
+                        if errs != nil && errs.Species != nil {
+                            class="select is-danger"
+                        } else {
+                            class="select"
+                        }
+                    >
                         <select name="species">
                           <option>Select Species</option>
                           for _, species := range memberSpecies {
@@ -70,6 +76,11 @@ templ NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mod
                            }
                         </select>
                     </div>
+                        if errs != nil && errs.Species != nil {
+                            <p class="help is-danger">
+                                { errs.Species.Error() }
+                            </p>
+                        }
                   </div>
                 </div>
                 <div class="field">

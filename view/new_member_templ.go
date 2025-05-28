@@ -159,30 +159,68 @@ func NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mode
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div class=\"select\"><select name=\"species\"><option>Select Species</option> ")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 17, "</div><div class=\"field\"><label class=\"label\">Species</label><div class=\"control\"><div")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if errs != nil && errs.Species != nil {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, " class=\"select is-danger\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			} else {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, " class=\"select\"")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "><select name=\"species\"><option>Select Species</option> ")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, species := range memberSpecies {
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "<option>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 21, "<option>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 				var templ_7745c5c3_Var7 string
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(species.String())
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `new_member.templ`, Line: 69, Col: 54}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `new_member.templ`, Line: 75, Col: 54}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "</option>")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 22, "</option>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "</select></div></div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option>Select Guild</option> <option>Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button hx-post=\"/members\" type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 23, "</select></div>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			if errs != nil && errs.Species != nil {
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 24, "<p class=\"help is-danger\">")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				var templ_7745c5c3_Var8 string
+				templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(errs.Species.Error())
+				if templ_7745c5c3_Err != nil {
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `new_member.templ`, Line: 81, Col: 54}
+				}
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 25, "</p>")
+				if templ_7745c5c3_Err != nil {
+					return templ_7745c5c3_Err
+				}
+			}
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 26, "</div></div><div class=\"field\"><label class=\"label\">Guild</label><div class=\"control\"><div class=\"select\"><select name=\"guild\"><option>Select Guild</option> <option>Founder's Guild</option></select></div></div></div><div class=\"field is-grouped\"><p class=\"control\"><button class=\"button is-link\" hx-get=\"/\" hx-push-url=\"true\">Home</button></p><p class=\"control\"><button hx-post=\"/members\" type=\"submit\" class=\"button is-primary\" form=\"new-member-form\" value=\"submit\">Submit</button></p></div></form></div></section>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
