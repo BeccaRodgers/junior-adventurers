@@ -81,17 +81,30 @@ templ NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mod
                                 { errs.Species.Error() }
                             </p>
                         }
-                  </div>
+                    </div>
                 </div>
                 <div class="field">
                   <label class="label">Guild</label>
                   <div class="control">
-                    <div class="select">
+                     <div
+                         if errs != nil && errs.Guild != nil {
+                             class="select is-danger"
+                         } else {
+                             class="select"
+                         }
+                     >
                         <select name="guild">
                             <option value="0">Select Guild</option>
                             <option value="1">Founder's Guild</option>
                         </select>
-                    </div>
+                     </div>
+                     <div>
+                         if errs != nil && errs.Guild != nil {
+                             <p class="help is-danger">
+                                 { errs.Guild.Error() }
+                             </p>
+                         }
+                     </div>
                   </div>
                 </div>
                 <div class="field is-grouped">

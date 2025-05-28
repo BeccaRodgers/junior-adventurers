@@ -129,6 +129,7 @@ type NewMemberError struct {
 	Name    error
 	DOB     error
 	Species error
+	Guild   error
 }
 
 func (n NewMemberError) Error() string {
