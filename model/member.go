@@ -91,6 +91,10 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 		errs.DOB = fmt.Errorf("invalid date of birth: %w", err)
 	}
 
+	if speciesID == Unknown {
+		errs.Species = fmt.Errorf("invalid species id: %v", speciesID)
+	}
+
 	if errs != nil {
 		return nil, errs
 	}
@@ -111,8 +115,9 @@ type MemberImage string
 var _ error = NewMemberError{}
 
 type NewMemberError struct {
-	Name error
-	DOB  error
+	Name    error
+	DOB     error
+	Species error
 }
 
 func (n NewMemberError) Error() string {
