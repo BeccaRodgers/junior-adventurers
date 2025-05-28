@@ -79,7 +79,16 @@ func (s MemberSerialization) Deserialize() *Member {
 	}
 }
 
-func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID) (*Member, *NewMemberError) {
+var nextAvailableID = MemberID(0)
+
+func NextAvailableID() MemberID {
+	// TODO add locking to make safe if multiple users
+	id := nextAvailableID
+	nextAvailableID++
+	return id
+}
+
+func NewMember(name MemberName, dob time.Time, speciesID SpeciesID) (*Member, *NewMemberError) {
 	// TODO validate inputs
 	errs := &NewMemberError{}
 	name, err := name.Normalize()
@@ -98,6 +107,8 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 	if errs.Name != nil || errs.DOB != nil || errs.Species != nil {
 		return nil, errs
 	}
+
+	id := NextAvailableID()
 	// TODO enforce rules.
 
 	return &Member{
