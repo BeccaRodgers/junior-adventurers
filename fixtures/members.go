@@ -7,8 +7,10 @@ import (
 	"time"
 )
 
+var AngelaId = model.NextAvailableID()
+
 func AngelaID() model.MemberID {
-	return 1
+	return AngelaId
 }
 
 func AngelaName() model.MemberName {
@@ -36,8 +38,10 @@ func Angela() *model.Member {
 	return AngelaSerialization().Deserialize()
 }
 
+var BobId = model.NextAvailableID()
+
 func BobID() model.MemberID {
-	return 2
+	return BobId
 }
 
 func Bob() *model.Member {
@@ -49,8 +53,10 @@ func Bob() *model.Member {
 	}.Deserialize()
 }
 
+var CharlotteId = model.NextAvailableID()
+
 func CharlotteID() model.MemberID {
-	return 3
+	return CharlotteId
 }
 
 func Charlotte() *model.Member {
@@ -62,8 +68,10 @@ func Charlotte() *model.Member {
 	}.Deserialize()
 }
 
+var DavidId = model.NextAvailableID()
+
 func DavidID() model.MemberID {
-	return 4
+	return DavidId
 }
 
 func David() *model.Member {
@@ -75,8 +83,10 @@ func David() *model.Member {
 	}.Deserialize()
 }
 
+var BeyonceId = model.NextAvailableID()
+
 func BeyonceID() model.MemberID {
-	return 5
+	return BeyonceId
 }
 
 func BeyonceImage() model.MemberImage {
@@ -93,8 +103,10 @@ func Beyonce() *model.Member {
 	}.Deserialize()
 }
 
+var AlexId = model.NextAvailableID()
+
 func AlexID() model.MemberID {
-	return 6
+	return AlexId
 }
 
 func Alex() *model.Member {
@@ -106,8 +118,10 @@ func Alex() *model.Member {
 	}.Deserialize()
 }
 
+var CarlosId = model.NextAvailableID()
+
 func CarlosID() model.MemberID {
-	return 7
+	return CarlosId
 }
 
 func Carlos() *model.Member {
@@ -119,8 +133,10 @@ func Carlos() *model.Member {
 	}.Deserialize()
 }
 
+var ErikaId = model.NextAvailableID()
+
 func ErikaID() model.MemberID {
-	return 8
+	return ErikaId
 }
 
 func Erika() *model.Member {
@@ -132,8 +148,10 @@ func Erika() *model.Member {
 	}.Deserialize()
 }
 
+var FredId = model.NextAvailableID()
+
 func FredID() model.MemberID {
-	return 9
+	return FredId
 }
 
 func Fred() *model.Member {

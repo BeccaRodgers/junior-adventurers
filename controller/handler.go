@@ -178,7 +178,6 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 	}
 
 	member, newMemberErr := model.NewMember(
-		model.MemberID(11), // TODO use next available id
 		model.MemberName(form.Name),
 		form.DOB,
 		model.UnmarshalMemberSpecies(form.Species),
