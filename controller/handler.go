@@ -182,6 +182,15 @@ func (c controller) postMember(w http.ResponseWriter, r *http.Request) {
 		form.DOB,
 		model.UnmarshalMemberSpecies(form.Species),
 	)
+
+	_, err = c.guilds.Get(ctx, model.GuildID(guildId))
+	if err != nil {
+		if newMemberErr == nil {
+			newMemberErr = &model.NewMemberError{}
+		}
+		newMemberErr.Guild = fmt.Errorf("invalid guild id: %v", guildId)
+	}
+
 	if newMemberErr != nil {
 		_ = view.NewMember(model.MemberSpeciesValues(), form, newMemberErr).Render(r.Context(), w)
 		return
