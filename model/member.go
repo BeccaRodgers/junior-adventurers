@@ -95,7 +95,7 @@ func NewMember(id MemberID, name MemberName, dob time.Time, speciesID SpeciesID)
 		errs.Species = fmt.Errorf("invalid species id: %v", speciesID)
 	}
 
-	if errs != nil {
+	if errs.Name != nil || errs.DOB != nil || errs.Species != nil {
 		return nil, errs
 	}
 	// TODO enforce rules.
