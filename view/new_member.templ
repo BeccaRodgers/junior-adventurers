@@ -72,7 +72,11 @@ templ NewMember(memberSpecies []model.SpeciesID, member NewMemberForm, errs *mod
                         <select name="species">
                           <option>Select Species</option>
                           for _, species := range memberSpecies {
-                            <option>{ species.String() }</option>
+                            <option
+                                if species.String() == member.Species {
+                                    selected
+                                }
+                            >{ species.String() }</option>
                            }
                         </select>
                     </div>
