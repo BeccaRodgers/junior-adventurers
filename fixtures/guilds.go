@@ -7,20 +7,32 @@ import (
 	"time"
 )
 
-func FoundersGuildID() model.GuildID {
+func FledglingFoundersGuildID() model.GuildID {
 	return 1
+}
+
+func FalconFoundersGuildID() model.GuildID {
+	return 2
 }
 
 func FoundersGuildName() model.GuildName {
 	return "Founder's Guild"
 }
 
-func FoundersGuildType() model.GuildType {
+func FledglingFoundersGuildType() model.GuildType {
 	return model.Fledgling
 }
 
-func FoundersGuildCapacity() model.GuildCapacity {
+func FalconFoundersGuildType() model.GuildType {
+	return model.Falcon
+}
+
+func FledglingFoundersGuildCapacity() model.GuildCapacity {
 	return 20
+}
+
+func FalconFoundersGuildCapacity() model.GuildCapacity {
+	return 30
 }
 
 func FoundersGuildFoundingDate() time.Time {
@@ -39,8 +51,12 @@ func FoundersGuildEmail() model.GuildEmail {
 	return "foundersguild@example.com"
 }
 
-func FoundersGuildGuildMaster() model.MemberID {
+func FledglingFoundersGuildGuildMaster() model.MemberID {
 	return BeyonceID()
+}
+
+func FalconFoundersGuildGuildMaster() model.MemberID {
+	return AlexID()
 }
 
 func FoundersGuildMembers() []model.MemberID {
@@ -67,31 +83,53 @@ func FoundersGuildEnquiries() model.GuildEnquiries {
 	}
 }
 
-func FoundersGuildSerialization() model.GuildSerialization {
+func FledglingFoundersGuildSerialization() model.GuildSerialization {
 	return model.GuildSerialization{
-		ID:           FoundersGuildID(),
+		ID:           FledglingFoundersGuildID(),
 		Name:         FoundersGuildName(),
-		GuildType:    FoundersGuildType(),
-		Capacity:     FoundersGuildCapacity(),
+		GuildType:    FledglingFoundersGuildType(),
+		Capacity:     FledglingFoundersGuildCapacity(),
 		FoundingDate: FoundersGuildFoundingDate(),
 		MeetingPlace: FoundersGuildMeetingPlace(),
 		MeetingTime:  FoundersGuildMeetingTime(),
 		Email:        FoundersGuildEmail(),
-		GuildMaster:  FoundersGuildGuildMaster(),
+		GuildMaster:  FledglingFoundersGuildGuildMaster(),
 		Members:      FoundersGuildMembers(),
 		Leaders:      FoundersGuildLeaders(),
 		Enquiries:    FoundersGuildEnquiries(),
 	}
 }
 
-func FoundersGuild() *model.Guild {
-	return FoundersGuildSerialization().Deserialize()
+func FalconFoundersGuildSerialization() model.GuildSerialization {
+	return model.GuildSerialization{
+		ID:           FalconFoundersGuildID(),
+		Name:         FoundersGuildName(),
+		GuildType:    FalconFoundersGuildType(),
+		Capacity:     FalconFoundersGuildCapacity(),
+		FoundingDate: FoundersGuildFoundingDate(),
+		MeetingPlace: FoundersGuildMeetingPlace(),
+		MeetingTime:  FoundersGuildMeetingTime(),
+		Email:        FoundersGuildEmail(),
+		GuildMaster:  FalconFoundersGuildGuildMaster(),
+		Members:      FoundersGuildMembers(),
+		Leaders:      FoundersGuildLeaders(),
+		Enquiries:    FoundersGuildEnquiries(),
+	}
+}
+
+func FledglingFoundersGuild() *model.Guild {
+	return FledglingFoundersGuildSerialization().Deserialize()
+}
+
+func FalconFoundersGuild() *model.Guild {
+	return FalconFoundersGuildSerialization().Deserialize()
 }
 
 func InsertGuilds(ctx context.Context, guilds model.GuildRepository) error {
 	var errs []error
 	for _, guild := range []*model.Guild{
-		FoundersGuild(),
+		FledglingFoundersGuild(),
+		FalconFoundersGuild(),
 	} {
 		if err := guilds.Insert(ctx, guild); err != nil {
 			errs = append(errs, err)

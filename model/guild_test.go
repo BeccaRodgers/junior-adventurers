@@ -9,7 +9,7 @@ import (
 )
 
 func Test_Guild_DeserializeSerialize(t *testing.T) {
-	guildSerialization := fixtures.FoundersGuildSerialization()
+	guildSerialization := fixtures.FledglingFoundersGuildSerialization()
 
 	guild := guildSerialization.Deserialize()
 	guildSerialized := guild.Serialize()
@@ -18,15 +18,15 @@ func Test_Guild_DeserializeSerialize(t *testing.T) {
 }
 
 func Test_Guild_ID(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	id := guild.ID()
 
-	assert.Equal(t, fixtures.FoundersGuildID(), id)
+	assert.Equal(t, fixtures.FledglingFoundersGuildID(), id)
 }
 
 func Test_Guild_Name(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	name := guild.Name()
 
@@ -34,23 +34,23 @@ func Test_Guild_Name(t *testing.T) {
 }
 
 func Test_Guild_GuildType(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	guildType := guild.Type()
 
-	assert.Equal(t, fixtures.FoundersGuildType(), guildType)
+	assert.Equal(t, fixtures.FledglingFoundersGuildType(), guildType)
 }
 
 func Test_Guild_Capacity(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	capacity := guild.Capacity()
 
-	assert.Equal(t, fixtures.FoundersGuildCapacity(), capacity)
+	assert.Equal(t, fixtures.FledglingFoundersGuildCapacity(), capacity)
 }
 
 func Test_Guild_FoundingDate(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	date := guild.FoundingDate()
 
@@ -58,7 +58,7 @@ func Test_Guild_FoundingDate(t *testing.T) {
 }
 
 func Test_Guild_MeetingPlace(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	place := guild.MeetingPlace()
 
@@ -66,7 +66,7 @@ func Test_Guild_MeetingPlace(t *testing.T) {
 }
 
 func Test_Guild_MeetingTime(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	time := guild.MeetingTime()
 
@@ -74,7 +74,7 @@ func Test_Guild_MeetingTime(t *testing.T) {
 }
 
 func Test_Guild_Email(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	email := guild.Email()
 
@@ -82,7 +82,7 @@ func Test_Guild_Email(t *testing.T) {
 }
 
 func Test_Guild_Members(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	members := guild.Members()
 
@@ -90,7 +90,7 @@ func Test_Guild_Members(t *testing.T) {
 }
 
 func Test_Guild_Leaders(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	leaders := guild.Leaders()
 
@@ -98,15 +98,15 @@ func Test_Guild_Leaders(t *testing.T) {
 }
 
 func Test_Guild_GuildMaster(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	guildMaster := guild.GuildMaster()
 
-	assert.Equal(t, fixtures.FoundersGuildGuildMaster(), guildMaster)
+	assert.Equal(t, fixtures.FledglingFoundersGuildGuildMaster(), guildMaster)
 }
 
 func Test_Guild_Enquiries(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 
 	enquiries := guild.Enquiries()
 
@@ -114,7 +114,7 @@ func Test_Guild_Enquiries(t *testing.T) {
 }
 
 func TestGuild_AddToEnquiries(t *testing.T) {
-	guild := fixtures.FoundersGuild()
+	guild := fixtures.FledglingFoundersGuild()
 	enquiries := guild.Enquiries()
 	_, ok := enquiries[fixtures.GeorgeID()]
 	require.False(t, ok)
