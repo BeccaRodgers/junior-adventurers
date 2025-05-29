@@ -3,6 +3,7 @@ package model_test
 import (
 	"github.com/stretchr/testify/assert"
 	"junior-adventurers/fixtures"
+	"junior-adventurers/model"
 	"testing"
 )
 
@@ -53,4 +54,13 @@ func Test_Member_Image(t *testing.T) {
 	image := member.Image()
 
 	assert.Equal(t, fixtures.BeyonceImage(), image)
+}
+
+func Test_Member_NextAvailableID(t *testing.T) {
+	// Fixtures will have already taken IDs, so start after these.
+	// Calling the function "uses" that ID, so we need to start from one after.
+	start := model.NextAvailableID() + 1
+	for i := start; i < start+10; i++ {
+		assert.Equal(t, i, model.NextAvailableID())
+	}
 }
