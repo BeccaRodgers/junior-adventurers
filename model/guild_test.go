@@ -2,7 +2,9 @@ package model_test
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"junior-adventurers/fixtures"
+	"junior-adventurers/model"
 	"testing"
 )
 
@@ -109,4 +111,19 @@ func Test_Guild_Enquiries(t *testing.T) {
 	enquiries := guild.Enquiries()
 
 	assert.Equal(t, fixtures.FoundersGuildEnquiries(), enquiries)
+}
+
+func TestGuild_AddToEnquiries(t *testing.T) {
+	guild := fixtures.FoundersGuild()
+	enquiries := guild.Enquiries()
+	_, ok := enquiries[fixtures.GeorgeID()]
+	require.False(t, ok)
+
+	guild.AddToEnquiries(fixtures.GeorgeID())
+
+	enquiries = guild.Enquiries()
+	status, ok := enquiries[fixtures.GeorgeID()]
+	assert.True(t, ok)
+	assert.Equal(t, model.Enquired, status)
+
 }

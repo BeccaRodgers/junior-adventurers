@@ -163,6 +163,21 @@ func Fred() *model.Member {
 	}.Deserialize()
 }
 
+var GeorgeId = model.NextAvailableID()
+
+func GeorgeID() model.MemberID {
+	return GeorgeId
+}
+
+func George() *model.Member {
+	return model.MemberSerialization{
+		ID:      GeorgeID(),
+		Name:    "George",
+		DOB:     time.Date(2015, 6, 10, 0, 0, 0, 0, time.UTC),
+		Species: model.Human,
+	}.Deserialize()
+}
+
 func InsertMembers(ctx context.Context, guilds model.MemberRepository) error {
 	var errs []error
 	for _, member := range []*model.Member{
@@ -175,6 +190,7 @@ func InsertMembers(ctx context.Context, guilds model.MemberRepository) error {
 		Carlos(),
 		Erika(),
 		Fred(),
+		George(),
 	} {
 		if err := guilds.Insert(ctx, member); err != nil {
 			errs = append(errs, err)
