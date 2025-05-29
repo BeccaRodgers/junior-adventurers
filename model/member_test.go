@@ -96,9 +96,17 @@ func TestMember_NewMember(t *testing.T) {
 			ok:         false,
 		},
 		{
-			name:       "Invalid DOB",
+			name:       "Empty DOB",
 			memberName: "Becca",
 			dob:        time.Time{},
+			speciesID:  model.Human,
+			expected:   nil,
+			ok:         false,
+		},
+		{
+			name:       "Future DOB",
+			memberName: "Becca",
+			dob:        time.Now().Add(time.Hour),
 			speciesID:  model.Human,
 			expected:   nil,
 			ok:         false,
