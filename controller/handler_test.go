@@ -22,6 +22,10 @@ func TestHandler_GuildPage(t *testing.T) {
 	approveGetPage(t, "/guilds/1")
 }
 
+func TestHandler_GuildPage_NoGuildMasterImage(t *testing.T) {
+	approveGetPage(t, "/guilds/2")
+}
+
 func TestHandler_GuildEnquiriesPage(t *testing.T) {
 	approveGetPage(t, "/guilds/1/enquiries")
 }
