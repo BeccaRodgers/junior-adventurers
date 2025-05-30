@@ -11,6 +11,8 @@ import (
 	"junior-adventurers/memdb"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
+	"strings"
 	"testing"
 )
 
@@ -51,6 +53,36 @@ func approveGetPage(t *testing.T, path string) {
 	recorder := httptest.NewRecorder()
 	handler.ServeHTTP(recorder, request)
 	assert.Equal(t, http.StatusOK, recorder.Code)
+	bodyBytes := gohtml.FormatBytes(recorder.Body.Bytes())
+	var formattedOutput bytes.Buffer
+	formattedOutput.Write(bodyBytes)
+	approvals.Verify(t, &formattedOutput)
+}
+
+func TestHandler_PostNewMember(t *testing.T) {
+	form := url.Values{
+		"name":    {"Lucius Caecilius Iucundus"},
+		"dob":     {"0009-04-04"},
+		"species": {"Human"},
+		"guild":   {"1"},
+	}
+	approvePostPage(t, "/members", form)
+}
+
+func approvePostPage(t *testing.T, path string, form url.Values) {
+	t.Helper()
+
+	guilds := memdb.NewGuildRepository()
+	require.NoError(t, fixtures.InsertGuilds(context.TODO(), guilds))
+	members := memdb.NewMemberRepository()
+	require.NoError(t, fixtures.InsertMembers(context.TODO(), members))
+
+	handler := Handler(guilds, members)
+	request := httptest.NewRequest(http.MethodPost, path, strings.NewReader(form.Encode()))
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	recorder := httptest.NewRecorder()
+	handler.ServeHTTP(recorder, request)
+	assert.Equal(t, http.StatusCreated, recorder.Code)
 	bodyBytes := gohtml.FormatBytes(recorder.Body.Bytes())
 	var formattedOutput bytes.Buffer
 	formattedOutput.Write(bodyBytes)
