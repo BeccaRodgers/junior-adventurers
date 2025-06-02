@@ -3,6 +3,7 @@ package controller
 import (
 	"bytes"
 	"context"
+	"fmt"
 	approvals "github.com/approvals/go-approval-tests"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -83,6 +84,33 @@ func approvePostPage(t *testing.T, path string, form url.Values) {
 	recorder := httptest.NewRecorder()
 	handler.ServeHTTP(recorder, request)
 	assert.Equal(t, http.StatusCreated, recorder.Code)
+	bodyBytes := gohtml.FormatBytes(recorder.Body.Bytes())
+	var formattedOutput bytes.Buffer
+	formattedOutput.Write(bodyBytes)
+	approvals.Verify(t, &formattedOutput)
+}
+
+func TestHandler_PutEnquiries(t *testing.T) {
+	form := url.Values{
+		"toWaitlist": {fmt.Sprintf("%v", fixtures.ErikaID())},
+	}
+	approvePutPage(t, fmt.Sprintf("/guilds/%v/enquiries", fixtures.FledglingFoundersGuildID()), form)
+}
+
+func approvePutPage(t *testing.T, path string, form url.Values) {
+	t.Helper()
+
+	guilds := memdb.NewGuildRepository()
+	require.NoError(t, fixtures.InsertGuilds(context.TODO(), guilds))
+	members := memdb.NewMemberRepository()
+	require.NoError(t, fixtures.InsertMembers(context.TODO(), members))
+
+	handler := Handler(guilds, members)
+	request := httptest.NewRequest(http.MethodPut, path, strings.NewReader(form.Encode()))
+	request.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+	recorder := httptest.NewRecorder()
+	handler.ServeHTTP(recorder, request)
+	assert.Equal(t, http.StatusOK, recorder.Code)
 	bodyBytes := gohtml.FormatBytes(recorder.Body.Bytes())
 	var formattedOutput bytes.Buffer
 	formattedOutput.Write(bodyBytes)

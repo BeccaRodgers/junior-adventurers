@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"slices"
 	"strconv"
+	"strings"
 	"time"
 )
 
@@ -28,6 +29,7 @@ func Handler(guilds model.GuildRepository, members model.MemberRepository) http.
 	controller.HandleFunc("GET /members/{memberID}", controller.getMember)
 	controller.HandleFunc("GET /guilds/{guildID}", controller.getGuild)
 	controller.HandleFunc("GET /guilds/{guildID}/enquiries", controller.getGuildEnquiries)
+	controller.HandleFunc("PUT /guilds/{guildID}/enquiries", controller.putGuildEnquiries)
 	return controller
 }
 
@@ -124,6 +126,71 @@ func (c controller) getGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 	}
 
 	guild, err := c.guilds.Get(ctx, model.GuildID(id))
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	var enquiries []*model.Member
+	var waitingList []*model.Member
+	for memberID, status := range guild.Enquiries() {
+		member, err := c.members.Get(ctx, memberID)
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		switch status {
+		case model.Enquired:
+			enquiries = append(enquiries, member)
+		case model.WaitingList:
+			waitingList = append(waitingList, member)
+		}
+	}
+
+	viewModel := c.assembleGuildEnquiriesData(guild, enquiries, waitingList)
+	_ = view.GuildEnquiries(viewModel).Render(r.Context(), w)
+}
+
+func (c controller) putGuildEnquiries(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	err := r.ParseForm()
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	toWaitlistStr := r.Form.Get("toWaitlist")
+
+	toWaitlist := []model.MemberID{}
+	toWaitlistStrs := strings.Split(toWaitlistStr, ",")
+	for _, idStr := range toWaitlistStrs {
+		id, err := strconv.Atoi(idStr)
+		if err != nil {
+			httperror.EncodeToText(w, err)
+			return
+		}
+		toWaitlist = append(toWaitlist, model.MemberID(id))
+	}
+
+	idString := r.PathValue("guildID")
+	id, err := strconv.Atoi(idString)
+	if err != nil {
+		httperror.EncodeToText(w, apperror.Validationf("invalid guild ID: %v", idString))
+		return
+	}
+
+	guild, err := c.guilds.Get(ctx, model.GuildID(id))
+	if err != nil {
+		httperror.EncodeToText(w, err)
+		return
+	}
+
+	err = c.guilds.Update(ctx, model.GuildID(id), func(x *model.Guild) error {
+		x.AddToWaitlist(toWaitlist)
+		guild.AddToWaitlist(toWaitlist)
+		return nil
+	})
 	if err != nil {
 		httperror.EncodeToText(w, err)
 		return

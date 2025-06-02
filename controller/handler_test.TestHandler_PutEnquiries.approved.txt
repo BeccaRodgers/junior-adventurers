@@ -30,13 +30,13 @@
           <b>
             Enquiries:
           </b>
-          2
+          1
         </p>
         <p class="block">
           <b>
             Waiting List:
           </b>
-          1
+          2
         </p>
         <h2 class="subtitle has-text-centered">
           Pending Enquiries
@@ -75,22 +75,6 @@
                 </button>
               </td>
             </tr>
-            <tr>
-              <td>
-                Erika
-              </td>
-              <td>
-                Human
-              </td>
-              <td>
-                12
-              </td>
-              <td>
-                <button hx-put="/guilds/1/enquiries?toWaitlist=7" type="submit" class="button is-primary" value="submit">
-                  Move to Waiting List
-                </button>
-              </td>
-            </tr>
           </tbody>
         </table>
         <h2 class="subtitle has-text-centered">
@@ -111,6 +95,17 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>
+                Erika
+              </td>
+              <td>
+                Human
+              </td>
+              <td>
+                12
+              </td>
+            </tr>
             <tr>
               <td>
                 Fred
