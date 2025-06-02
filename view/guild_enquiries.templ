@@ -27,6 +27,7 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                         <th>Name</th>
                         <th>Species</th>
                         <th>Age</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,16 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                             <td>{ enquiry.Name }</td>
                             <td>{ enquiry.Species }</td>
                             <td>{ strconv.Itoa(enquiry.Age) }</td>
+                            <td>
+                                <button
+                                    hx-put={ fmt.Sprintf("/guilds/%v/enquiries?toWaitlist=%v", guild.ID, enquiry.ID) }
+                                    type="submit"
+                                    class="button is-primary"
+                                    value="submit"
+                                >
+                                Move to Waiting List
+                                </button>
+                            </td>
                         </tr>
                     }
                     </tbody>

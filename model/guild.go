@@ -171,3 +171,9 @@ const (
 func (g *Guild) AddToEnquiries(id MemberID) {
 	g.enquiries[id] = Enquired
 }
+
+func (g *Guild) AddToWaitlist(ids []MemberID) {
+	for _, id := range ids {
+		g.enquiries[id] = WaitingList
+	}
+}
