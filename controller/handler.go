@@ -163,14 +163,17 @@ func (c controller) putGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 	toWaitlistStr := r.Form.Get("toWaitlist")
 
 	toWaitlist := []model.MemberID{}
-	toWaitlistStrs := strings.Split(toWaitlistStr, ",")
-	for _, idStr := range toWaitlistStrs {
-		id, err := strconv.Atoi(idStr)
-		if err != nil {
-			httperror.EncodeToText(w, err)
-			return
+
+	if toWaitlistStr != "" {
+		toWaitlistStrs := strings.Split(toWaitlistStr, ",")
+		for _, idStr := range toWaitlistStrs {
+			id, err := strconv.Atoi(idStr)
+			if err != nil {
+				httperror.EncodeToText(w, err)
+				return
+			}
+			toWaitlist = append(toWaitlist, model.MemberID(id))
 		}
-		toWaitlist = append(toWaitlist, model.MemberID(id))
 	}
 
 	idString := r.PathValue("guildID")
