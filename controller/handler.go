@@ -308,10 +308,13 @@ func (c controller) assembleGuildData(guild *model.Guild, members, leaders []*mo
 }
 
 func (c controller) assembleGuildEnquiriesData(guild *model.Guild, enquiries, waitingList []*model.Member) view.GuildEnquiriesData {
+	minAge, maxAge := guild.Type().AgeRange()
 	return view.GuildEnquiriesData{
 		ID:          int(guild.ID()),
 		Name:        string(guild.Name()),
 		Type:        guild.Type().String(),
+		MinAge:      minAge,
+		MaxAge:      maxAge,
 		Capacity:    int(guild.Capacity()),
 		NumMembers:  len(guild.Members()),
 		Enquiries:   c.assembleMembers(enquiries),
