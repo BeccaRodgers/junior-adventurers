@@ -24,7 +24,7 @@
           <b>
             Spaces:
           </b>
-          16/20
+          15/20
         </p>
         <p class="block">
           <b>
@@ -36,7 +36,7 @@
           <b>
             Waiting List:
           </b>
-          2
+          1
         </p>
         <h2 class="subtitle has-text-centered">
           Pending Enquiries
@@ -92,6 +92,9 @@
               <th>
                 Age
               </th>
+              <th>
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -105,16 +108,10 @@
               <td>
                 12
               </td>
-            </tr>
-            <tr>
               <td>
-                Fred
-              </td>
-              <td>
-                Human
-              </td>
-              <td class="is-warning has-tooltip-arrow" data-tooltip="Age outside range 10-14">
-                9
+                <button hx-put="/guilds/1/enquiries?toMembers=7" type="submit" class="button is-primary" value="submit">
+                  Move to Guild
+                </button>
               </td>
             </tr>
           </tbody>

@@ -93,6 +93,7 @@ func approvePostPage(t *testing.T, path string, form url.Values) {
 func TestHandler_PutEnquiries(t *testing.T) {
 	form := url.Values{
 		"toWaitlist": {fmt.Sprintf("%v", fixtures.ErikaID())},
+		"toMembers":  {fmt.Sprintf("%v", fixtures.FredID())},
 	}
 	approvePutPage(t, fmt.Sprintf("/guilds/%v/enquiries", fixtures.FledglingFoundersGuildID()), form)
 }

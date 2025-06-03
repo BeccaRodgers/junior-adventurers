@@ -108,6 +108,9 @@
               <th>
                 Age
               </th>
+              <th>
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -120,6 +123,11 @@
               </td>
               <td class="is-warning has-tooltip-arrow" data-tooltip="Age outside range 10-14">
                 9
+              </td>
+              <td>
+                <button hx-put="/guilds/1/enquiries?toMembers=8" type="submit" class="button is-primary" value="submit">
+                  Move to Guild
+                </button>
               </td>
             </tr>
           </tbody>
