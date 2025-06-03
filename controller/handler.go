@@ -176,6 +176,22 @@ func (c controller) putGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	toMembersStr := r.Form.Get("toMembers")
+
+	var toMembers []model.MemberID
+
+	if toMembersStr != "" {
+		toMembersStrs := strings.Split(toMembersStr, ",")
+		for _, idStr := range toMembersStrs {
+			id, err := strconv.Atoi(idStr)
+			if err != nil {
+				httperror.EncodeToText(w, err)
+				return
+			}
+			toMembers = append(toMembers, model.MemberID(id))
+		}
+	}
+
 	idString := r.PathValue("guildID")
 	id, err := strconv.Atoi(idString)
 	if err != nil {
@@ -191,7 +207,9 @@ func (c controller) putGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 
 	err = c.guilds.Update(ctx, model.GuildID(id), func(x *model.Guild) error {
 		x.AddToWaitlist(toWaitlist)
+		x.AddToMembers(toMembers)
 		guild.AddToWaitlist(toWaitlist)
+		guild.AddToMembers(toMembers)
 		return nil
 	})
 	if err != nil {

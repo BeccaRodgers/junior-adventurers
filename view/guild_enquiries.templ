@@ -65,6 +65,7 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                         <th>Name</th>
                         <th>Species</th>
                         <th>Age</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -78,6 +79,16 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                                     data-tooltip={ fmt.Sprintf("Age outside range %v-%v", guild.MinAge, guild.MaxAge) }
                                 }
                             >{ strconv.Itoa(member.Age) }</td>
+                            <td>
+                                <button
+                                    hx-put={ fmt.Sprintf("/guilds/%v/enquiries?toMembers=%v", guild.ID, member.ID) }
+                                    type="submit"
+                                    class="button is-primary"
+                                    value="submit"
+                                >
+                                Move to Guild
+                                </button>
+                            </td>
                         </tr>
                     }
                     </tbody>
