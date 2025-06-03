@@ -45,6 +45,8 @@ type GuildEnquiriesData struct {
 	ID          int
 	Name        string
 	Type        string
+	MinAge      int
+	MaxAge      int
 	Capacity    int
 	NumMembers  int
 	Enquiries   []MemberData

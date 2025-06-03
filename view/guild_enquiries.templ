@@ -35,7 +35,13 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                         <tr>
                             <td>{ enquiry.Name }</td>
                             <td>{ enquiry.Species }</td>
-                            <td>{ strconv.Itoa(enquiry.Age) }</td>
+                            <td
+                                if enquiry.Age < guild.MinAge || enquiry.Age > guild.MaxAge {
+                                    class="is-warning has-tooltip-arrow"
+                                    data-tooltip={ fmt.Sprintf("Age outside range %v-%v", guild.MinAge, guild.MaxAge) }
+                                }
+                            >{ strconv.Itoa(enquiry.Age) }
+                            </td>
                             <td>
                                 <button
                                     hx-put={ fmt.Sprintf("/guilds/%v/enquiries?toWaitlist=%v", guild.ID, enquiry.ID) }
@@ -66,7 +72,12 @@ templ GuildEnquiries(guild GuildEnquiriesData) {
                         <tr>
                             <td>{ member.Name }</td>
                             <td>{ member.Species }</td>
-                            <td>{ strconv.Itoa(member.Age) }</td>
+                            <td
+                                if member.Age < guild.MinAge || member.Age > guild.MaxAge {
+                                    class="is-warning has-tooltip-arrow"
+                                    data-tooltip={ fmt.Sprintf("Age outside range %v-%v", guild.MinAge, guild.MaxAge) }
+                                }
+                            >{ strconv.Itoa(member.Age) }</td>
                         </tr>
                     }
                     </tbody>
