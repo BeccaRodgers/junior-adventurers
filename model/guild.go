@@ -177,3 +177,16 @@ func (g *Guild) AddToWaitlist(ids []MemberID) {
 		g.enquiries[id] = WaitingList
 	}
 }
+
+func (g *Guild) RemoveFromWaitlist(ids []MemberID) {
+	for _, id := range ids {
+		delete(g.enquiries, id)
+	}
+}
+
+func (g *Guild) AddToMembers(ids []MemberID) {
+	g.RemoveFromWaitlist(ids)
+	for _, id := range ids {
+		g.members = append(g.members, MemberID(id))
+	}
+}
