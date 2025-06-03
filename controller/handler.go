@@ -162,7 +162,7 @@ func (c controller) putGuildEnquiries(w http.ResponseWriter, r *http.Request) {
 
 	toWaitlistStr := r.Form.Get("toWaitlist")
 
-	toWaitlist := []model.MemberID{}
+	var toWaitlist []model.MemberID
 
 	if toWaitlistStr != "" {
 		toWaitlistStrs := strings.Split(toWaitlistStr, ",")
