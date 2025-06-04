@@ -41,7 +41,7 @@
         <h2 class="subtitle has-text-centered">
           Pending Enquiries
         </h2>
-        <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>
@@ -96,7 +96,7 @@
         <h2 class="subtitle has-text-centered">
           Waiting List
         </h2>
-        <table class="table table is-bordered is-striped is-hoverable is-fullwidth">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
               <th>
