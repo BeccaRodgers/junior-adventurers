@@ -44,16 +44,16 @@
         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th>
+              <th class="width: 25%">
                 Name
               </th>
-              <th>
+              <th style="width: 25%">
                 Species
               </th>
-              <th>
+              <th style="width: 25%">
                 Age
               </th>
-              <th>
+              <th style="width: 25%">
                 Actions
               </th>
             </tr>
@@ -83,16 +83,16 @@
         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th>
+              <th style="width: 25%">
                 Name
               </th>
-              <th>
+              <th style="width: 25%">
                 Species
               </th>
-              <th>
+              <th style="width: 25%">
                 Age
               </th>
-              <th>
+              <th style="width: 25%">
                 Actions
               </th>
             </tr>
