@@ -44,7 +44,7 @@
         <table class="table is-bordered is-striped is-hoverable is-fullwidth">
           <thead>
             <tr>
-              <th class="width: 25%">
+              <th style="width: 25%">
                 Name
               </th>
               <th style="width: 25%">
