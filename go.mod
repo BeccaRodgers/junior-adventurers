@@ -6,7 +6,7 @@ toolchain go1.24.3
 
 require (
 	artk.dev v0.9.0
-	github.com/a-h/templ v0.3.887
+	github.com/a-h/templ v0.3.898
 	github.com/air-verse/air v1.62.0
 	github.com/approvals/go-approval-tests v1.5.1
 	github.com/stretchr/testify v1.10.0
