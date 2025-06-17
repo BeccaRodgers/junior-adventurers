@@ -106,7 +106,7 @@
                 Human
               </td>
               <td>
-                12
+                13
               </td>
               <td>
                 <button hx-put="/guilds/1/enquiries?toMembers=7" type="submit" class="button is-primary" value="submit">
