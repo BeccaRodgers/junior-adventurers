@@ -158,7 +158,7 @@ func Fred() *model.Member {
 	return model.MemberSerialization{
 		ID:      FredID(),
 		Name:    "Fred",
-		DOB:     time.Date(2015, 6, 10, 0, 0, 0, 0, time.UTC),
+		DOB:     time.Date(2016, 6, 10, 0, 0, 0, 0, time.UTC),
 		Species: model.Human,
 	}.Deserialize()
 }
