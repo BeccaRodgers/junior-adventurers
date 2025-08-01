@@ -8,7 +8,7 @@ require (
 	artk.dev v0.9.0
 	github.com/a-h/templ v0.3.924
 	github.com/air-verse/air v1.62.0
-	github.com/approvals/go-approval-tests v1.5.1
+	github.com/approvals/go-approval-tests v1.6.0
 	github.com/stretchr/testify v1.10.0
 	github.com/yosssi/gohtml v0.0.0-20201013000340-ee4748c638f4
 )
