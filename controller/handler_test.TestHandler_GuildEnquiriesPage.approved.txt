@@ -67,7 +67,7 @@
                 Werewolf
               </td>
               <td class="is-warning has-tooltip-arrow" data-tooltip="Age outside range 10-14">
-                40
+                41
               </td>
               <td>
                 <button hx-put="/guilds/1/enquiries?toWaitlist=6" type="submit" class="button is-primary" value="submit">
