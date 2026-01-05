@@ -4,7 +4,7 @@ go 1.25
 
 require (
 	artk.dev v0.9.0
-	github.com/a-h/templ v0.3.960
+	github.com/a-h/templ v0.3.977
 	github.com/air-verse/air v1.63.0
 	github.com/approvals/go-approval-tests v1.6.0
 	github.com/stretchr/testify v1.11.1
