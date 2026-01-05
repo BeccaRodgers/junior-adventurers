@@ -5,7 +5,7 @@ go 1.25
 require (
 	artk.dev v0.9.0
 	github.com/a-h/templ v0.3.960
-	github.com/air-verse/air v1.63.0
+	github.com/air-verse/air v1.63.6
 	github.com/approvals/go-approval-tests v1.6.0
 	github.com/stretchr/testify v1.11.1
 	github.com/yosssi/gohtml v0.0.0-20201013000340-ee4748c638f4
@@ -19,7 +19,6 @@ require (
 	github.com/bep/golibsass v1.2.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cli/browser v1.3.0 // indirect
-	github.com/creack/pty v1.1.24 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fatih/color v1.18.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
